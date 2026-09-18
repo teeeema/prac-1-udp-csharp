@@ -1,0 +1,23 @@
+# .NET build output
+**/bin/
+**/obj/
+
+# IDE settings
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Runtime files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Legacy build folders that should not be committed
+/build/
+/build-*/
+/graphify-out/
+/tmp/
