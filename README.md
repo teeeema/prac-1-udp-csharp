@@ -94,4 +94,5 @@ Received STATE_UPDATE seq=2 ack=SHOOT status=ACCEPTED ...
 
 - [Архитектура и схема взаимодействия](docs/Architecture_Design.md)
 - [Спецификация бинарного UDP-протокола](docs/Protocol_Specification.md)
+- [Демонстрация_работы_протокола](docs/Демонстрация_работы_протокола.md)
 
