@@ -1,6 +1,7 @@
+using System.Diagnostics;
 using System.Net;
-using System.Net.Sockets;
 using UdpGame.Protocol;
+using UdpGame.Transport;
 
 namespace UdpGame.Server;
 
@@ -14,7 +15,7 @@ internal static class Program
         try
         {
             ServerOptions options = ParseOptions(args);
-            using var udp = new UdpClient(options.Port);
+            using var transport = UdpTransport.Bind(options.Port);
             using var logFile = new StreamWriter(options.LogFile, append: true) { AutoFlush = true };
             var clients = new Dictionary<string, ClientState>();
 
@@ -24,16 +25,37 @@ internal static class Program
             while (options.MaxPackets == 0 || processedPackets < options.MaxPackets)
             {
                 var sender = new IPEndPoint(IPAddress.Any, 0);
-                byte[] datagram = udp.Receive(ref sender);
+                byte[] datagram = transport.Receive(ref sender);
+                ulong serverReceiveTimeUs = NowMicroseconds();
                 string clientKey = sender.ToString();
 
                 try
                 {
                     Packet packet = ProtocolSerializer.Deserialize(datagram);
 
-                    if (packet.Header.PacketType == PacketType.StateUpdate)
+                    if (packet.Payload is Ping ping)
                     {
-                        Log(logFile, $"REJECTED from={clientKey} reason=client sent server-only STATE_UPDATE");
+                        ulong serverSendTimeUs = NowMicroseconds();
+                        var pong = new Pong(
+                            ping.ClientSendTimeUs,
+                            serverReceiveTimeUs,
+                            serverSendTimeUs);
+                        byte[] response = ProtocolSerializer.SerializePong(
+                            packet.Header.SequenceNumber,
+                            pong);
+                        transport.SendTo(response, sender);
+                        Log(
+                            logFile,
+                            $"command=PING seq={packet.Header.SequenceNumber} from={clientKey} result=PONG");
+                        processedPackets++;
+                        continue;
+                    }
+
+                    if (packet.Header.PacketType is PacketType.StateUpdate or PacketType.Pong)
+                    {
+                        Log(
+                            logFile,
+                            $"REJECTED from={clientKey} reason=client sent server-only {PacketTypeName(packet.Header.PacketType)}");
                         continue;
                     }
 
@@ -80,7 +102,7 @@ internal static class Program
                         throw new ProtocolException("Unsupported client payload");
                     }
 
-                    var response = new StateUpdate(
+                    var responseState = new StateUpdate(
                         packet.Header.PacketType,
                         status,
                         state.X,
@@ -91,8 +113,8 @@ internal static class Program
 
                     byte[] responseBytes = ProtocolSerializer.SerializeStateUpdate(
                         packet.Header.SequenceNumber,
-                        response);
-                    udp.Send(responseBytes, responseBytes.Length, sender);
+                        responseState);
+                    transport.SendTo(responseBytes, sender);
 
                     Log(
                         logFile,
@@ -111,7 +133,7 @@ internal static class Program
                 }
             }
 
-            Log(logFile, $"server stopped after processing {processedPackets} commands");
+            Log(logFile, $"server stopped after processing {processedPackets} packets");
             return 0;
         }
         catch (Exception error)
@@ -119,6 +141,12 @@ internal static class Program
             Console.Error.WriteLine($"Server error: {error.Message}");
             return 1;
         }
+    }
+
+    private static ulong NowMicroseconds()
+    {
+        long timestamp = Stopwatch.GetTimestamp();
+        return checked((ulong)(timestamp * (1_000_000d / Stopwatch.Frequency)));
     }
 
     private static bool CoordinateInWorld(float value) =>
@@ -175,6 +203,8 @@ internal static class Program
         PacketType.Movement => "MOVEMENT",
         PacketType.Shoot => "SHOOT",
         PacketType.StateUpdate => "STATE_UPDATE",
+        PacketType.Ping => "PING",
+        PacketType.Pong => "PONG",
         _ => "UNKNOWN",
     };
 

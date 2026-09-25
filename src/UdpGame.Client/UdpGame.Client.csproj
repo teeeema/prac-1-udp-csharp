@@ -2,6 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UdpGame.Protocol\UdpGame.Protocol.csproj" />
+    <ProjectReference Include="..\UdpGame.Telemetry\UdpGame.Telemetry.csproj" />
+    <ProjectReference Include="..\UdpGame.Transport\UdpGame.Transport.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

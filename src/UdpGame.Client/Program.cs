@@ -11,6 +11,11 @@ internal static class Program
         try
         {
             ClientOptions options = ParseOptions(args);
+            if (options.Experiment)
+            {
+                return ExperimentRunner.Run(options.Host, options.Port, options.CsvPath);
+            }
+
             using var udp = new UdpClient();
             udp.Client.ReceiveTimeout = options.TimeoutMilliseconds;
             udp.Connect(options.Host, options.Port);
@@ -121,10 +126,17 @@ internal static class Program
                         "timeout-ms",
                         int.MaxValue);
                     break;
+                case "--experiment":
+                    options.Experiment = true;
+                    break;
+                case "--csv" when i + 1 < args.Length:
+                    options.CsvPath = args[++i];
+                    break;
                 case "--help":
                     Console.WriteLine(
                         "Usage: UdpGame.Client [--host 127.0.0.1] [--port 27015] " +
-                        "[--count 6] [--interval-ms 500] [--timeout-ms 2000]");
+                        "[--count 6] [--interval-ms 500] [--timeout-ms 2000] " +
+                        "[--experiment] [--csv docs/latency_samples.csv]");
                     Environment.Exit(0);
                     break;
                 default:
@@ -177,5 +189,7 @@ internal static class Program
         public int Count { get; set; } = 6;
         public int IntervalMilliseconds { get; set; } = 500;
         public int TimeoutMilliseconds { get; set; } = 2000;
+        public bool Experiment { get; set; }
+        public string CsvPath { get; set; } = "docs/latency_samples.csv";
     }
 }

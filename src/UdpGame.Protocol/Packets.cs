@@ -3,7 +3,8 @@ namespace UdpGame.Protocol;
 public readonly record struct PacketHeader(
     PacketType PacketType,
     ushort SequenceNumber,
-    ushort PayloadSize);
+    ushort PayloadSize,
+    ushort ProtocolVersion);
 
 public readonly record struct Movement(float X, float Y, float Z);
 
@@ -17,5 +18,12 @@ public readonly record struct StateUpdate(
     float Z,
     uint ShotsFired,
     byte LastWeaponId);
+
+public readonly record struct Ping(ulong ClientSendTimeUs);
+
+public readonly record struct Pong(
+    ulong ClientSendTimeUs,
+    ulong ServerReceiveTimeUs,
+    ulong ServerSendTimeUs);
 
 public sealed record Packet(PacketHeader Header, object Payload);
