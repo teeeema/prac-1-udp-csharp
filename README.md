@@ -153,4 +153,5 @@ Rscript scripts/plot_reliability.R
 
 
 - [Демонстрация ПР №2](docs/Демонстрация_запуска_ПР2.md): запуск и работоспособность ПР №2.
+- [Демонстрация запуска ПР №3](docs/Демонстрация_запуска_ПР3.md): полный запуск reliable UDP, ACK, retransmission, Adaptive RTO, Karn и результаты 6 серий.
 
