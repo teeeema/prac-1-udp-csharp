@@ -14,7 +14,7 @@ public sealed class ProtocolTests
 
         byte[] expected =
         [
-            0x01, 0x12, 0x34, 0x00, 0x0C, 0x00, 0x01,
+            0x01, 0x12, 0x34, 0x00, 0x0C, 0x00, 0x02, 0x00,
             0x3F, 0x80, 0x00, 0x00,
             0xC0, 0x20, 0x00, 0x00,
             0x3E, 0x80, 0x00, 0x00,
@@ -38,7 +38,7 @@ public sealed class ProtocolTests
     public void Shoot_HasExpectedWireFormat()
     {
         byte[] bytes = ProtocolSerializer.SerializeShoot(7, new Shoot(3));
-        byte[] expected = [0x02, 0x00, 0x07, 0x00, 0x01, 0x00, 0x01, 0x03];
+        byte[] expected = [0x02, 0x00, 0x07, 0x00, 0x01, 0x00, 0x02, 0x00, 0x03];
 
         CollectionAssert.AreEqual(expected, bytes);
 
@@ -95,7 +95,7 @@ public sealed class ProtocolTests
 
         byte[] expected =
         [
-            0x04, 0x12, 0x34, 0x00, 0x08, 0x00, 0x01,
+            0x04, 0x12, 0x34, 0x00, 0x08, 0x00, 0x02, 0x00,
             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
         ];
         CollectionAssert.AreEqual(expected, bytes);
@@ -148,7 +148,7 @@ public sealed class ProtocolTests
     public void WrongProtocolVersion_IsRejected()
     {
         byte[] bytes = ProtocolSerializer.SerializePing(1, new Ping(100));
-        bytes[6] = 2;
+        bytes[6] = 0xFF;
 
         Assert.Throws<ProtocolException>(() => ProtocolSerializer.Deserialize(bytes));
     }

@@ -4,53 +4,60 @@ namespace UdpGame.Protocol;
 
 public static class ProtocolSerializer
 {
-    public static byte[] SerializeMovement(ushort sequenceNumber, Movement movement)
+    public static byte[] SerializeMovement(ushort sequenceNumber, Movement movement, bool requiresAck = false)
     {
-        var bytes = CreatePacket(PacketType.Movement, sequenceNumber, ProtocolConstants.MovementPayloadSize);
-        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(7, 4), movement.X);
-        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(11, 4), movement.Y);
-        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(15, 4), movement.Z);
+        var bytes = CreatePacket(PacketType.Movement, sequenceNumber, ProtocolConstants.MovementPayloadSize, requiresAck);
+        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(ProtocolConstants.HeaderSize, 4), movement.X);
+        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(ProtocolConstants.HeaderSize + 4, 4), movement.Y);
+        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(ProtocolConstants.HeaderSize + 8, 4), movement.Z);
         return bytes;
     }
 
-    public static byte[] SerializeShoot(ushort sequenceNumber, Shoot shoot)
+    public static byte[] SerializeShoot(ushort sequenceNumber, Shoot shoot, bool requiresAck = false)
     {
-        var bytes = CreatePacket(PacketType.Shoot, sequenceNumber, ProtocolConstants.ShootPayloadSize);
-        bytes[7] = shoot.WeaponId;
+        var bytes = CreatePacket(PacketType.Shoot, sequenceNumber, ProtocolConstants.ShootPayloadSize, requiresAck);
+        bytes[ProtocolConstants.HeaderSize] = shoot.WeaponId;
         return bytes;
     }
 
-    public static byte[] SerializeStateUpdate(ushort sequenceNumber, StateUpdate state)
+    public static byte[] SerializeStateUpdate(ushort sequenceNumber, StateUpdate state, bool requiresAck = false)
     {
         if (state.AcknowledgedType is not (PacketType.Movement or PacketType.Shoot))
         {
             throw new ProtocolException("STATE_UPDATE can acknowledge only MOVEMENT or SHOOT");
         }
 
-        var bytes = CreatePacket(PacketType.StateUpdate, sequenceNumber, ProtocolConstants.StateUpdatePayloadSize);
-        bytes[7] = (byte)state.AcknowledgedType;
-        bytes[8] = (byte)state.Status;
-        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(9, 4), state.X);
-        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(13, 4), state.Y);
-        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(17, 4), state.Z);
-        BinaryPrimitives.WriteUInt32BigEndian(bytes.AsSpan(21, 4), state.ShotsFired);
-        bytes[25] = state.LastWeaponId;
+        var bytes = CreatePacket(PacketType.StateUpdate, sequenceNumber, ProtocolConstants.StateUpdatePayloadSize, requiresAck);
+        bytes[ProtocolConstants.HeaderSize] = (byte)state.AcknowledgedType;
+        bytes[ProtocolConstants.HeaderSize + 1] = (byte)state.Status;
+        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(ProtocolConstants.HeaderSize + 2, 4), state.X);
+        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(ProtocolConstants.HeaderSize + 6, 4), state.Y);
+        BinaryPrimitives.WriteSingleBigEndian(bytes.AsSpan(ProtocolConstants.HeaderSize + 10, 4), state.Z);
+        BinaryPrimitives.WriteUInt32BigEndian(bytes.AsSpan(ProtocolConstants.HeaderSize + 14, 4), state.ShotsFired);
+        bytes[ProtocolConstants.HeaderSize + 18] = state.LastWeaponId;
         return bytes;
     }
 
     public static byte[] SerializePing(ushort sequenceNumber, Ping ping)
     {
         var bytes = CreatePacket(PacketType.Ping, sequenceNumber, ProtocolConstants.PingPayloadSize);
-        WriteU64(bytes, 7, ping.ClientSendTimeUs);
+        WriteU64(bytes, ProtocolConstants.HeaderSize, ping.ClientSendTimeUs);
         return bytes;
     }
 
     public static byte[] SerializePong(ushort sequenceNumber, Pong pong)
     {
         var bytes = CreatePacket(PacketType.Pong, sequenceNumber, ProtocolConstants.PongPayloadSize);
-        WriteU64(bytes, 7, pong.ClientSendTimeUs);
-        WriteU64(bytes, 15, pong.ServerReceiveTimeUs);
-        WriteU64(bytes, 23, pong.ServerSendTimeUs);
+        WriteU64(bytes, ProtocolConstants.HeaderSize, pong.ClientSendTimeUs);
+        WriteU64(bytes, ProtocolConstants.HeaderSize + 8, pong.ServerReceiveTimeUs);
+        WriteU64(bytes, ProtocolConstants.HeaderSize + 16, pong.ServerSendTimeUs);
+        return bytes;
+    }
+
+    public static byte[] SerializeAck(ushort sequenceNumber, AckPayload ack)
+    {
+        var bytes = CreatePacket(PacketType.Ack, sequenceNumber, ProtocolConstants.AckPayloadSize);
+        WriteU16(bytes, ProtocolConstants.HeaderSize, ack.AcknowledgedSequence);
         return bytes;
     }
 
@@ -77,12 +84,24 @@ public static class ProtocolSerializer
                 $"Unsupported protocol version {protocolVersion}, expected {ProtocolConstants.ProtocolVersion}");
         }
 
+        byte requiresAckByte = data[7];
+        if (requiresAckByte > 1)
+        {
+            throw new ProtocolException($"Invalid RequiresAck byte: {requiresAckByte}");
+        }
+
+        bool requiresAck = requiresAckByte == 1;
+        if (packetType == PacketType.Ack && requiresAck)
+        {
+            throw new ProtocolException("ACK cannot require ACK");
+        }
+
         if (payloadSize != data.Length - ProtocolConstants.HeaderSize)
         {
             throw new ProtocolException("PayloadSize does not match the UDP datagram length");
         }
 
-        var header = new PacketHeader(packetType, sequenceNumber, payloadSize, protocolVersion);
+        var header = new PacketHeader(packetType, sequenceNumber, payloadSize, protocolVersion, requiresAck);
         return packetType switch
         {
             PacketType.Movement => new Packet(header, ReadMovement(data, payloadSize)),
@@ -90,6 +109,7 @@ public static class ProtocolSerializer
             PacketType.StateUpdate => new Packet(header, ReadStateUpdate(data, payloadSize)),
             PacketType.Ping => new Packet(header, ReadPing(data, payloadSize)),
             PacketType.Pong => new Packet(header, ReadPong(data, payloadSize)),
+            PacketType.Ack => new Packet(header, ReadAck(data, payloadSize)),
             _ => throw new ProtocolException("Unknown packet type"),
         };
     }
@@ -118,7 +138,7 @@ public static class ProtocolSerializer
         return BinaryPrimitives.ReadUInt64BigEndian(source.Slice(offset, sizeof(ulong)));
     }
 
-    private static byte[] CreatePacket(PacketType packetType, ushort sequenceNumber, int payloadSize)
+    private static byte[] CreatePacket(PacketType packetType, ushort sequenceNumber, int payloadSize, bool requiresAck = false)
     {
         int packetSize = ProtocolConstants.HeaderSize + payloadSize;
         if (packetSize > ProtocolConstants.MaxPacketSize)
@@ -131,15 +151,16 @@ public static class ProtocolSerializer
         WriteU16(bytes, 1, sequenceNumber);
         WriteU16(bytes, 3, checked((ushort)payloadSize));
         WriteU16(bytes, 5, ProtocolConstants.ProtocolVersion);
+        bytes[7] = requiresAck ? (byte)1 : (byte)0;
         return bytes;
     }
 
     private static Movement ReadMovement(ReadOnlySpan<byte> data, ushort payloadSize)
     {
         RequirePayloadSize(PacketType.Movement, payloadSize, ProtocolConstants.MovementPayloadSize);
-        float x = BinaryPrimitives.ReadSingleBigEndian(data.Slice(7, 4));
-        float y = BinaryPrimitives.ReadSingleBigEndian(data.Slice(11, 4));
-        float z = BinaryPrimitives.ReadSingleBigEndian(data.Slice(15, 4));
+        float x = BinaryPrimitives.ReadSingleBigEndian(data.Slice(ProtocolConstants.HeaderSize, 4));
+        float y = BinaryPrimitives.ReadSingleBigEndian(data.Slice(ProtocolConstants.HeaderSize + 4, 4));
+        float z = BinaryPrimitives.ReadSingleBigEndian(data.Slice(ProtocolConstants.HeaderSize + 8, 4));
 
         if (!float.IsFinite(x) || !float.IsFinite(y) || !float.IsFinite(z))
         {
@@ -152,25 +173,25 @@ public static class ProtocolSerializer
     private static Shoot ReadShoot(ReadOnlySpan<byte> data, ushort payloadSize)
     {
         RequirePayloadSize(PacketType.Shoot, payloadSize, ProtocolConstants.ShootPayloadSize);
-        return new Shoot(data[7]);
+        return new Shoot(data[ProtocolConstants.HeaderSize]);
     }
 
     private static StateUpdate ReadStateUpdate(ReadOnlySpan<byte> data, ushort payloadSize)
     {
         RequirePayloadSize(PacketType.StateUpdate, payloadSize, ProtocolConstants.StateUpdatePayloadSize);
 
-        PacketType acknowledgedType = DecodePacketType(data[7]);
+        PacketType acknowledgedType = DecodePacketType(data[ProtocolConstants.HeaderSize]);
         if (acknowledgedType is not (PacketType.Movement or PacketType.Shoot))
         {
             throw new ProtocolException("STATE_UPDATE can acknowledge only MOVEMENT or SHOOT");
         }
 
-        StatusCode status = DecodeStatus(data[8]);
-        float x = BinaryPrimitives.ReadSingleBigEndian(data.Slice(9, 4));
-        float y = BinaryPrimitives.ReadSingleBigEndian(data.Slice(13, 4));
-        float z = BinaryPrimitives.ReadSingleBigEndian(data.Slice(17, 4));
-        uint shotsFired = BinaryPrimitives.ReadUInt32BigEndian(data.Slice(21, 4));
-        byte lastWeaponId = data[25];
+        StatusCode status = DecodeStatus(data[ProtocolConstants.HeaderSize + 1]);
+        float x = BinaryPrimitives.ReadSingleBigEndian(data.Slice(ProtocolConstants.HeaderSize + 2, 4));
+        float y = BinaryPrimitives.ReadSingleBigEndian(data.Slice(ProtocolConstants.HeaderSize + 6, 4));
+        float z = BinaryPrimitives.ReadSingleBigEndian(data.Slice(ProtocolConstants.HeaderSize + 10, 4));
+        uint shotsFired = BinaryPrimitives.ReadUInt32BigEndian(data.Slice(ProtocolConstants.HeaderSize + 14, 4));
+        byte lastWeaponId = data[ProtocolConstants.HeaderSize + 18];
 
         if (!float.IsFinite(x) || !float.IsFinite(y) || !float.IsFinite(z))
         {
@@ -190,16 +211,22 @@ public static class ProtocolSerializer
     private static Ping ReadPing(ReadOnlySpan<byte> data, ushort payloadSize)
     {
         RequirePayloadSize(PacketType.Ping, payloadSize, ProtocolConstants.PingPayloadSize);
-        return new Ping(ReadU64(data, 7));
+        return new Ping(ReadU64(data, ProtocolConstants.HeaderSize));
     }
 
     private static Pong ReadPong(ReadOnlySpan<byte> data, ushort payloadSize)
     {
         RequirePayloadSize(PacketType.Pong, payloadSize, ProtocolConstants.PongPayloadSize);
         return new Pong(
-            ReadU64(data, 7),
-            ReadU64(data, 15),
-            ReadU64(data, 23));
+            ReadU64(data, ProtocolConstants.HeaderSize),
+            ReadU64(data, ProtocolConstants.HeaderSize + 8),
+            ReadU64(data, ProtocolConstants.HeaderSize + 16));
+    }
+
+    private static AckPayload ReadAck(ReadOnlySpan<byte> data, ushort payloadSize)
+    {
+        RequirePayloadSize(PacketType.Ack, payloadSize, ProtocolConstants.AckPayloadSize);
+        return new AckPayload(ReadU16(data, ProtocolConstants.HeaderSize));
     }
 
     private static PacketType DecodePacketType(byte value) => value switch
@@ -209,6 +236,7 @@ public static class ProtocolSerializer
         (byte)PacketType.StateUpdate => PacketType.StateUpdate,
         (byte)PacketType.Ping => PacketType.Ping,
         (byte)PacketType.Pong => PacketType.Pong,
+        (byte)PacketType.Ack => PacketType.Ack,
         _ => throw new ProtocolException($"Unknown packet type: {value}"),
     };
 
