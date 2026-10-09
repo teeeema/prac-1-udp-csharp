@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
 using UdpGame.Protocol;
+using UdpGame.Reliability;
 using UdpGame.Telemetry;
 using UdpGame.Transport;
 
@@ -61,6 +62,7 @@ internal static class ExperimentRunner
         List<CsvRow> rows)
     {
         using var transport = UdpTransport.Connect(host, port, 20, profile);
+        var adaptiveTimeout = new AdaptiveTimeout();
         var tracker = new TelemetryTracker(TimeoutMs, capacity: 128);
         var sampleBySequence = new Dictionary<ushort, int>();
         var completed = new HashSet<ushort>();
@@ -131,6 +133,7 @@ internal static class ExperimentRunner
                     result.Measurement is not null &&
                     completed.Add(result.Measurement.SequenceNumber))
                 {
+                    adaptiveTimeout.OnSample(result.Measurement.RttMs!.Value);
                     rows.Add(CreateRow(
                         result.Measurement,
                         experimentStartUs,

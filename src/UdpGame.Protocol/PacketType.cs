@@ -7,4 +7,5 @@ public enum PacketType : byte
     StateUpdate = 3,
     Ping = 4,
     Pong = 5,
+    Ack = 6,
 }

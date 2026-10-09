@@ -1,200 +1,163 @@
 # Protocol Specification
 
-## 1. Назначение протокола
+## 1. Назначение и транспорт
 
-Бинарный протокол передаёт игровые команды ПР №1 и измерительные сообщения ПР №2. Спецификация описывает текущие [ProtocolSerializer](../src/UdpGame.Protocol/ProtocolSerializer.cs), [типы](../src/UdpGame.Protocol/Packets.cs) и [константы](../src/UdpGame.Protocol/ProtocolConstants.cs). Каждое поле имеет фиксированное положение; объекты C# напрямую в сеть не копируются.
+Бинарный протокол C# / .NET 10 передаёт игровые команды ПР №1, измерения ПР №2 и ACK ПР №3. Источники: [ProtocolSerializer](../src/UdpGame.Protocol/ProtocolSerializer.cs), [модели](../src/UdpGame.Protocol/Packets.cs), [константы](../src/UdpGame.Protocol/ProtocolConstants.cs).
 
-## 2. Transport: UDP
+Одна UDP-дейтаграмма содержит один header и один payload. Размеры указаны без UDP/IP-заголовков. MaxPacketSize = 1024 байта; padding, склейка и фрагментация на уровне приложения отсутствуют. UDP сам не гарантирует доставку или порядок. STATE_UPDATE сообщает результат игровой команды; ACK подтверждает доставку по sequence, а не принятие команды игровой логикой.
 
-Одна UDP-дейтаграмма содержит один пакет приложения: header + payload. Размеры ниже относятся к данным UDP, без IP- и UDP-заголовков. Склейка сообщений, padding и фрагментация на уровне приложения не предусмотрены. Максимальный размер пакета приложения — MaxPacketSize = 1024 байта.
+## 2. Network byte order
 
-UDP не даёт подтверждений, упорядочивания или повторной передачи. STATE_UPDATE подтверждает игровую команду, PONG отвечает на PING, но эти ответы сами по себе не превращают реализацию в надёжный транспорт.
+Сериализация ручная, через BinaryPrimitives; память C#-объектов и платформенная сериализация bool не используются. UInt16, UInt32, UInt64 и IEEE 754 Float32 передаются big-endian. UInt16 0x1234 = `12 34`, UInt64 0x0102030405060708 = `01 02 03 04 05 06 07 08`. ReadU16/WriteU16/ReadU64/WriteU64 проверяют границы и бросают ProtocolException. Однобайтовые поля не имеют порядка байтов.
 
-## 3. Network Byte Order
+## 3. Общий header
 
-Многобайтовые числа записываются в big-endian (Network Byte Order): старший байт первым. UInt16 0x1234 — байты 12 34; UInt64 0x0102030405060708 — 01 02 03 04 05 06 07 08.
+HeaderSize = **8 байт**, ProtocolVersion = **2**. Все offsets ниже отсчитываются от начала дейтаграммы с нуля. Payload начинается на offset 8. Полная длина = 8 + PayloadSize.
 
-WriteU16/ReadU16 работают с 2 байтами, WriteU64/ReadU64 — с 8. Они проверяют границы через EnsureRange и используют BinaryPrimitives. Float32 — IEEE 754, записывается WriteSingleBigEndian и читается ReadSingleBigEndian. ShotsFired — UInt32 big-endian. Однобайтовым полям порядок байтов не нужен. Выравнивания и padding нет.
-
-## 4. Общий Header
-
-HeaderSize = 7 байт. Во всех таблицах **Offset отсчитывается от начала дейтаграммы**, с нуля; payload начинается на offset 7.
-
-| Offset | Size, bytes | Field | Type | Description |
+| Offset | Size, bytes | Field | Type | Значение |
 |---:|---:|---|---|---|
-| 0 | 1 | PacketType | UInt8 | Код сообщения 1–5 |
-| 1 | 2 | SequenceNumber | UInt16 | Номер запроса, возвращаемый в ответе |
-| 3 | 2 | PayloadSize | UInt16 | Число байтов после header |
-| 5 | 2 | ProtocolVersion | UInt16 | Текущая версия 1 |
+| 0 | 1 | PacketType | UInt8 | Код 1–6 |
+| 1 | 2 | SequenceNumber | UInt16 BE | Номер пакета / корреляция ответа |
+| 3 | 2 | PayloadSize | UInt16 BE | Длина payload без header |
+| 5 | 2 | ProtocolVersion | UInt16 BE | 2 |
+| 7 | 1 | RequiresAck | UInt8 | 0 = ACK не требуется, 1 = требуется ACK |
 
-Именно в этом порядке поля записываются CreatePacket и читаются Deserialize. Полная длина равна 7 + PayloadSize.
+Другие значения RequiresAck недопустимы. В модели PacketHeader поле имеет тип bool; на wire это строго один байт. SerializeMovement, SerializeShoot и SerializeStateUpdate принимают optional `bool requiresAck = false`. SerializePing, SerializePong и SerializeAck всегда записывают false. Десериализация запрещает RequiresAck=true для ACK; для других типов допускает 0/1, политика приложения делает надёжным только SHOOT; MOVEMENT/PING/PONG/STATE_UPDATE отправляются без ACK.
 
-## 5. PacketType
+**ACK никогда не требует ACK.** Это исключает бесконечную цепочку подтверждений.
 
-| Wire name | C# enum | Value | Направление | Назначение |
-|---|---|---:|---|---|
-| MOVEMENT | Movement | 1 | Client → Server | Предлагаемые координаты |
-| SHOOT | Shoot | 2 | Client → Server | Команда выстрела |
-| STATE_UPDATE | StateUpdate | 3 | Server → Client | Результат команды и авторитетное состояние |
-| PING | Ping | 4 | Client → Server | Запрос измерения задержки |
-| PONG | Pong | 5 | Server → Client | Ответ с клиентской и серверными метками |
+## 4. PacketType и размеры
 
-Другие коды отвергаются сериализатором. Направление проверяет приложение: сервер отвергает полученные от клиента STATE_UPDATE/PONG, даже если wire format корректен.
+Существующие числовые значения сохранены; ACK получил новое значение 6.
 
-## 6. MOVEMENT
+| Wire name | C# enum | Value | Направление | Payload, bytes | Datagram, bytes |
+|---|---|---:|---|---:|---:|
+| MOVEMENT | Movement | 1 | Client → Server | 12 | 20 |
+| SHOOT | Shoot | 2 | Client → Server | 1 | 9 |
+| STATE_UPDATE | StateUpdate | 3 | Server → Client | 19 | 27 |
+| PING | Ping | 4 | Client → Server | 8 | 16 |
+| PONG | Pong | 5 | Server → Client | 24 | 32 |
+| ACK | Ack | 6 | Server → Client для reliable SHOOT | 2 | 10 |
 
-Client → Server. Payload — 12 байт, дейтаграмма — 19 байт.
+Неизвестные коды отвергаются. Направление контролирует приложение: сервер отвергает STATE_UPDATE/PONG от клиента; входящий ACK игнорируется, потому что сервер в этой работе не создаёт reliable-пакеты.
 
-| Offset | Size, bytes | Field | Type | Description |
-|---:|---:|---|---|---|
-| 7 | 4 | X | Float32 | Координата X |
-| 11 | 4 | Y | Float32 | Координата Y |
-| 15 | 4 | Z | Float32 | Координата Z |
+## 5. MOVEMENT
 
-Deserialize отвергает NaN/Infinity. Сервер дополнительно требует каждую координату в [-1000; 1000]. Конечная координата вне мира — валидный пакет, но отклонённая команда (OUT_OF_RANGE). Позиция изменяется только при принятии всех трёх координат.
+| Offset | Size | Field | Type |
+|---:|---:|---|---|
+| 8 | 4 | X | Float32 BE |
+| 12 | 4 | Y | Float32 BE |
+| 16 | 4 | Z | Float32 BE |
 
-Пример: sequence 0x1234, координаты (1.0, -2.5, 0.25):
+Deserialize отклоняет NaN/Infinity. Сервер принимает координаты в [-1000; 1000], меняя позицию только при принятии всех трёх; иначе возвращает OUT_OF_RANGE и прежнее состояние.
+
+Sequence 0x1234, координаты (1, -2.5, 0.25), RequiresAck=false:
 
 ```text
-01 12 34 00 0C 00 01 | 3F 80 00 00 | C0 20 00 00 | 3E 80 00 00
-header (7 bytes)    | X           | Y           | Z
+01 12 34 00 0C 00 02 00 | 3F 80 00 00 | C0 20 00 00 | 3E 80 00 00
 ```
 
-## 7. SHOOT
+## 6. SHOOT
 
-Client → Server. Payload — 1 байт, дейтаграмма — 8 байт.
+| Offset | Size | Field | Type |
+|---:|---:|---|---|
+| 8 | 1 | WeaponId | UInt8 |
 
-| Offset | Size, bytes | Field | Type | Description |
-|---:|---:|---|---|---|
-| 7 | 1 | WeaponId | UInt8 | Идентификатор оружия |
+Wire допускает любой UInt8; сервер принимает 1–3. Принятие увеличивает ShotsFired и обновляет LastWeaponId без изменения позиции. Отказ даёт OUT_OF_RANGE и прежнее состояние.
 
-Wire format допускает любой UInt8; сервер принимает 1–3. При принятии увеличивает ShotsFired и обновляет LastWeaponId, не меняя позицию. При отказе возвращает прежнее состояние и OUT_OF_RANGE.
+Sequence 7, WeaponId 3, RequiresAck=false: `02 00 07 00 01 00 02 00 03`.
+При RequiresAck=true: `02 00 07 00 01 00 02 01 03`. Текущий игровой клиент создаёт SHOOT с true и повторяет исходные bytes до ACK либо failed; MOVEMENT остаётся с false.
 
-Пример sequence 7, WeaponId 3: `02 00 07 00 01 00 01 03`.
+## 7. STATE_UPDATE
 
-## 8. STATE_UPDATE
+Ответ на MOVEMENT/SHOOT с тем же header SequenceNumber; не используется как ответ на PING.
 
-Server → Client, ответ на MOVEMENT/SHOOT с тем же sequence. Payload — 19 байт, дейтаграмма — 26 байт.
+| Offset | Size | Field | Type |
+|---:|---:|---|---|
+| 8 | 1 | AcknowledgedType | MOVEMENT=1 или SHOOT=2 |
+| 9 | 1 | Status | ACCEPTED=0, OUT_OF_RANGE=1 |
+| 10 | 4 | X | Float32 BE |
+| 14 | 4 | Y | Float32 BE |
+| 18 | 4 | Z | Float32 BE |
+| 22 | 4 | ShotsFired | UInt32 BE |
+| 26 | 1 | LastWeaponId | UInt8; до выстрела 0 |
 
-| Offset | Size, bytes | Field | Type | Description |
-|---:|---:|---|---|---|
-| 7 | 1 | AcknowledgedType | UInt8 / PacketType | Только MOVEMENT (1) или SHOOT (2) |
-| 8 | 1 | Status | UInt8 / StatusCode | ACCEPTED (0), OUT_OF_RANGE (1) |
-| 9 | 4 | X | Float32 | Серверная координата X |
-| 13 | 4 | Y | Float32 | Серверная координата Y |
-| 17 | 4 | Z | Float32 | Серверная координата Z |
-| 21 | 4 | ShotsFired | UInt32 | Счётчик принятых выстрелов |
-| 25 | 1 | LastWeaponId | UInt8 | Последнее принятое оружие; до выстрела 0 |
+Deserialize проверяет AcknowledgedType, Status и конечность координат. SerializeStateUpdate также проверяет AcknowledgedType.
 
-Неверный AcknowledgedType, неизвестный Status и неконечные координаты отвергаются при чтении. Проверка AcknowledgedType есть также в SerializeStateUpdate. STATE_UPDATE не используется как ответ на PING.
+## 8. PING / PONG
 
-## 9. PING
+PING не меняет игру и передаётся без ACK.
 
-Client → Server. Payload — 8 байт, дейтаграмма — 15 байт. Запрос не меняет игровое состояние.
+| Пакет | Offset | Size | Field | Type |
+|---|---:|---:|---|---|
+| PING | 8 | 8 | ClientSendTimeUs | UInt64 BE |
+| PONG | 8 | 8 | ClientSendTimeUs | UInt64 BE |
+| PONG | 16 | 8 | ServerReceiveTimeUs | UInt64 BE |
+| PONG | 24 | 8 | ServerSendTimeUs | UInt64 BE |
 
-| Offset | Size, bytes | Field | Type | Description |
-|---:|---:|---|---|---|
-| 7 | 8 | ClientSendTimeUs | UInt64 | Монотонное клиентское время до сериализации и эмуляции |
+PING sequence 0x1234, timestamp 0x0102030405060708:
 
 ```text
-Bytes:  0       1..2       3..4       5..6       7..14
-       +-------+----------+----------+----------+------------------+
-       | 04    | sequence | 00 08    | 00 01    | ClientSendTimeUs |
-       +-------+----------+----------+----------+------------------+
-       |<------------ Header: 7 bytes -------->| Payload: 8 bytes |
+04 12 34 00 08 00 02 00 | 01 02 03 04 05 06 07 08
 ```
 
-Пример из wire-format теста: sequence 0x1234, timestamp 0x0102030405060708:
+PONG sequence 9, три метки из round-trip теста:
 
 ```text
-04 12 34 00 08 00 01 | 01 02 03 04 05 06 07 08
+offset  0: 05 00 09 00 18 00 02 00
+offset  8: 01 02 03 04 05 06 07 08
+offset 16: 11 12 13 14 15 16 17 18
+offset 24: 21 22 23 24 25 26 27 28
 ```
 
-Метка выражена в микросекундах и основана на Stopwatch.GetTimestamp()/Frequency; это не UTC/Unix time. PING регистрируется в TelemetryTracker до Send, поэтому задержка Network Emulator входит в RTT.
+Метки — монотонное время в микросекундах, основанное на Stopwatch.GetTimestamp()/Frequency, не UTC. Клиент регистрирует PING до Send и эмуляции. Сервер снимает receive time после Receive до Deserialize, send time до сериализации PONG. Sequence и ClientSendTimeUs возвращаются клиенту. RTT = (ClientReceiveTimeUs − ClientSendTimeUs) / 1000 ms; обе метки сняты на часах клиента. Серверные метки не участвуют в вычислении RTT и не сохраняются в CSV ПР №2. Разность серверного и клиентского времени не является RTT: часы не синхронизированы и разность не включает обратный путь.
 
-## 10. PONG
+## 9. ACK / AckPayload
 
-Server → Client. Payload — 24 байта, дейтаграмма — 31 байт.
+`public readonly record struct AckPayload(ushort AcknowledgedSequence)`.
 
-| Offset | Size, bytes | Field | Type | Description |
-|---:|---:|---|---|---|
-| 7 | 8 | ClientSendTimeUs | UInt64 | Точная копия метки PING |
-| 15 | 8 | ServerReceiveTimeUs | UInt64 | Серверное время после Receive, до Deserialize |
-| 23 | 8 | ServerSendTimeUs | UInt64 | Серверное время до SerializePong и SendTo |
+| Offset | Size | Field | Type |
+|---:|---:|---|---|
+| 8 | 2 | AcknowledgedSequence | UInt16 BE |
+
+PayloadSize строго 2, дейтаграмма строго **10 байт**, RequiresAck строго **0**. SerializeAck(sequenceNumber, ack) вручную записывает UInt16. Подтверждаемый номер берётся из payload, а не из header SequenceNumber ACK. Два номера могут отличаться; будущий отправитель ACK выбирает header sequence отдельно.
+
+ACK header sequence 0x5678, подтверждение 0x1234:
 
 ```text
-Bytes: 0..6          7..14               15..22                23..30
-      +-------------+-------------------+---------------------+------------------+
-      | Header      | ClientSendTimeUs  | ServerReceiveTimeUs | ServerSendTimeUs |
-      +-------------+-------------------+---------------------+------------------+
-Size: 7 bytes       |<---------------- Payload: 24 bytes ---------------------->|
+06 56 78 00 02 00 02 00 | 12 34
 ```
 
-Пример sequence 9 и трёх UInt64 из Pong round-trip теста:
+Повторный или неизвестный ACK не является ошибкой ReliableChannel: OnAckReceived возвращает false. Сервер отправляет ACK через UDP до проверки duplicate и игрового эффекта; для duplicate также отправляет ACK. Его header SequenceNumber сейчас равен подтверждаемому номеру, но клиент использует AcknowledgedSequence из payload.
 
-```text
-offset  0: 05 00 09 00 18 00 01
-offset  7: 01 02 03 04 05 06 07 08
-offset 15: 11 12 13 14 15 16 17 18
-offset 23: 21 22 23 24 25 26 27 28
-```
+## 10. ProtocolVersion и совместимость
 
-Клиент сопоставляет sequence с inFlight и проверяет ClientSendTimeUs. RTT равен (ClientReceiveTimeUs − ClientSendTimeUs) / 1000 в миллисекундах. Обе метки сняты на одной монотонной шкале клиента.
+Добавление RequiresAck сдвигает все payload на один байт: формат v1 (header 7) и v2 (header 8) несовместимы. Поэтому версия повышена с 1 до 2; Deserialize принимает только 2. Старые v1-пакеты явно отклоняются, автоматического согласования версий и fallback нет. Клиент и сервер необходимо пересобирать и обновлять вместе.
 
-**ServerReceiveTimeUs − ClientSendTimeUs не является RTT**: часы сторон не обязаны иметь общую точку отсчёта и синхронизацию; кроме того, разность не включает обратный путь. Даже при синхронизации она оценивала бы одностороннюю задержку, а не round trip. Серверные метки обеспечивают наблюдаемость; код не вычитает серверную обработку из RTT и не сохраняет эти две метки в CSV.
+Сохраняются значения PacketType 1–5, форматы payload и сценарии ПР №1/№2. Старые вызовы сериализаторов продолжают компилироваться и отправляют RequiresAck=false. Это совместимость сценариев и исходных вызовов, а не байтовая или ABI-совместимость. PacketHeader получил дополнительное поле, в том числе изменился автоматически генерируемый Deconstruct. Сохранённые CSV, графики и демонстрации ПР №1/№2 относятся к прежнему запуску и не являются измерениями v2.
 
-## 11. ProtocolVersion
+## 11. SequenceNumber и PayloadSize
 
-ProtocolVersion = 1 записывается во все пакеты. Deserialize требует точного совпадения, автоматического согласования версий нет. Пакеты прежнего формата без этого поля текущим Deserialize не поддерживаются. Номер практической работы не равен ProtocolVersion.
+SequenceNumber — UInt16 0–65535, ноль разрешён. Обычный клиент генерирует 1..count, эксперимент ПР №2 — 1..300, ПР №3 — 1..600 (нечётные PING, чётные SHOOT). Сервер копирует номер запроса в STATE_UPDATE/PONG. PayloadSize не включает header и должен совпасть с длиной дейтаграммы минус 8 и фиксированным размером типа.
 
-## 12. SequenceNumber
+ReliableChannel запрещает повторную регистрацию pending sequence. Серверная дедупликация хранит 1024 ID/результата на endpoint и допускает rollover 65535 → 0 через равенство ID. Защита от старых ACK при переиспользовании номера после завершения и session identifier не реализованы; sequence сам не обеспечивает глобальное exactly-once выполнение SHOOT. Канал должен принадлежать одному peer; endpoint проверяет интеграционный слой.
 
-UInt16 в диапазоне 0–65535. Сериализатор не запрещает ноль; обычный клиент генерирует 1..count, эксперимент — 1..300. Сервер копирует sequence в STATE_UPDATE/PONG.
+## 12. Validation
 
-Номер обеспечивает сопоставление, но сам не гарантирует доставку и не устраняет дубли команд. TelemetryTracker запрещает повторную регистрацию номера, пока он есть в inFlight. Надёжное переиспользование номеров с защитой от старых пакетов и retransmission не реализованы.
+Порядок в Deserialize:
 
-## 13. PayloadSize
+1. Длина не меньше HeaderSize=8 и не больше MaxPacketSize=1024.
+2. DecodePacketType проверяет известный код; header UInt16 читаются на offsets 1, 3, 5.
+3. ProtocolVersion должна быть 2.
+4. RequiresAck должен быть 0/1; ACK с 1 отклоняется.
+5. PayloadSize должен совпасть с фактической длиной остатка.
+6. Read-функция проверяет точный размер payload выбранного типа **до чтения его полей**.
+7. Проверяются поля payload: конечность float, Status и AcknowledgedType где применимо.
 
-Поле не включает header. Deserialize проверяет PayloadSize == data.Length − 7, затем точный размер выбранного типа. Лишние байты так же недопустимы, как недостающие. Вместимость UInt16 не отменяет MaxPacketSize и фиксированные размеры payload.
+Неизвестный тип/версия, invalid RequiresAck, ACK с размером не 2, ACK требующий ACK, усечение и лишние байты дают ProtocolException. Например: header длиной 7, RequiresAck=2, v1 SHOOT, ACK с согласованным payload размера 0/1/3, PONG длиной 31 вместо 32, datagram длиной 1025.
 
-## 14. Validation
+Сервер ловит ProtocolException, логирует MALFORMED и продолжает. Валидная игровая команда вне допустимых границ даёт OUT_OF_RANGE. Игровая validation не подменяется ACK.
 
-Порядок проверок соответствует коду:
+## 13. Проверка
 
-1. Длина дейтаграммы не меньше HeaderSize = 7 и не больше MaxPacketSize = 1024.
-2. PacketType известен; UInt16 header читаются на offsets 1, 3, 5.
-3. ProtocolVersion равна 1.
-4. PayloadSize совпадает с фактическим остатком дейтаграммы.
-5. Read-функция выбранного типа проверяет точный размер payload.
-6. Читаются поля; проверяются конечность float, enum Status и AcknowledgedType там, где это требуется.
-
-Публичные ReadU16/ReadU64/WriteU16/WriteU64 проверяют диапазон буфера, включая отрицательный offset. UInt64 timestamps проверяются как байты нужной длины, а не как синхронизированные часы. Смысл возвращённой клиентской метки PONG проверяет ExperimentRunner.
-
-Сериализация и десериализация не симметричны по всем проверкам: SerializeMovement записывает float, запрет NaN/Infinity действует при Deserialize. Границы мира и WeaponId проверяются сервером после wire-validation.
-
-## 15. Ошибочные datagrams
-
-| Пример | Причина отказа |
-|---|---|
-| 6 байт вместо header | Недостаточная длина |
-| PacketType = 255 | Неизвестный тип |
-| ProtocolVersion = 2 | Неподдерживаемая версия |
-| SHOOT объявляет 2 байта payload, но передан 1 | Несовпадение PayloadSize и длины |
-| PING с согласованной общей длиной, но payload не 8 | Неверная длина payload типа |
-| PONG обрезан до 30 байт | Truncated packet: ожидается 31 |
-| Дейтаграмма длиной 1025 | Превышение MaxPacketSize |
-| MOVEMENT с NaN | Неконечная координата |
-
-Ошибки wire format дают ProtocolException. Сервер ловит его внутри цикла, логирует MALFORMED, отбрасывает пакет и продолжает работу. Валидный MOVEMENT вне границ мира не malformed: сервер отвечает OUT_OF_RANGE. Валидный server-only пакет от клиента логируется как REJECTED без ответа.
-
-## 16. Таблица всех размеров пакетов
-
-| Тип | Header, bytes | Payload, bytes | Datagram, bytes |
-|---|---:|---:|---:|
-| MOVEMENT | 7 | 12 | 19 |
-| SHOOT | 7 | 1 | 8 |
-| STATE_UPDATE | 7 | 19 | 26 |
-| PING | 7 | 8 | 15 |
-| PONG | 7 | 24 | 31 |
-
-Размеры, порядок и примеры сверены с текущим ProtocolSerializer. В Protocol.Tests 11 методов: игровые round-trip и wire format, PING/PONG, UInt16/UInt64 big-endian и отказы при неправильных размере, версии, типе и усечении. Не каждый приведённый отрицательный пример имеет отдельный тест.
+Protocol.Tests содержит 21 тестовый метод: 11 сохранённых (wire fixtures обновлены для v2) и 10 новых. Проверяются ACK round-trip и точные big-endian байты, RequiresAck на игровых пакетах, все прежние типы и их false по умолчанию, запрет ACK-on-ACK, неверный флаг, неверные длины ACK с согласованной длиной datagram, каждое усечение ACK/header, v1 и превышение MaxPacketSize. Метрики ПР №2 проверяются отдельно в Telemetry.Tests; Client/Server ACK, Karn, failed и dedup — в 20 Integration-тестах. [Реализация надёжности и фактический эксперимент](Reliability_Protocol.md).

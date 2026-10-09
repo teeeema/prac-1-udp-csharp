@@ -1,0 +1,370 @@
+RUN_START_UTC 2026-10-09T07:48:03.723661+00:00
+CODE_HEAD 39c5146ed2b238409658ac5e43686b7bb52a1e9f
+COMMAND dotnet /Users/tema/Documents/Разработка многопользовательских приложений виртуальной реальности/prac_1/src/UdpGame.Client/bin/Debug/net10.0/UdpGame.Client.dll --host 127.0.0.1 --port 60706 --reliability-experiment --csv docs/reliability_samples.csv
+baseline: ACK seq=2 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=4 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=6 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=8 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=10 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=12 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=14 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=16 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=18 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=20 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=22 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=24 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=26 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=28 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=30 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=32 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=34 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=36 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=38 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=40 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=42 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=44 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=46 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=48 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=50 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=52 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=54 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=56 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=58 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=60 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=62 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=64 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=66 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=68 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=70 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=72 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=74 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=76 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=78 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=80 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=82 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=84 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=86 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=88 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=90 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=92 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=94 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=96 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=98 attempts=1 Karn_sample=True RTO=100,000 ms
+baseline: ACK seq=100 attempts=1 Karn_sample=True RTO=100,000 ms
+RESULT baseline: sent=50 delivered=50 first_attempt=50 first_attempt_percent=100.000000 retransmit_total=0 failed=0 failed_percent=0.000000 avg_attempts=1.000000 avg_time_to_ack_ms=0.183600 final_rto_ms=100.000000 max_attempts=1
+loss_5: ACK seq=102 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=104 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=106 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=108 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=110 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=112 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=114 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=116 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=118 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=120 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=122 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: SHOOT seq=124 retransmission attempt=2
+loss_5: SHOOT seq=124 retransmission attempt=3
+loss_5: ACK seq=124 attempts=3 Karn_sample=False RTO=100,000 ms
+loss_5: ACK seq=126 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=128 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=130 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=132 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=134 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=136 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=138 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=140 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=142 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=144 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=146 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: SHOOT seq=148 retransmission attempt=2
+loss_5: ACK seq=148 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_5: ACK seq=150 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: SHOOT seq=152 retransmission attempt=2
+loss_5: ACK seq=152 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_5: ACK seq=154 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=156 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=158 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=160 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=162 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=164 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=166 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=168 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=170 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=172 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=174 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=176 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=178 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=180 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=182 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=184 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: SHOOT seq=186 retransmission attempt=2
+loss_5: ACK seq=186 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_5: ACK seq=188 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=190 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=192 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=194 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: ACK seq=196 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_5: SHOOT seq=198 retransmission attempt=2
+loss_5: ACK seq=198 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_5: ACK seq=200 attempts=1 Karn_sample=True RTO=100,000 ms
+RESULT loss_5: sent=50 delivered=50 first_attempt=45 first_attempt_percent=90.000000 retransmit_total=6 failed=0 failed_percent=0.000000 avg_attempts=1.120000 avg_time_to_ack_ms=13.336700 final_rto_ms=100.000000 max_attempts=3
+loss_10: SHOOT seq=202 retransmission attempt=2
+loss_10: ACK seq=202 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_10: ACK seq=204 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=206 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=208 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=210 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=212 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=214 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=216 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: SHOOT seq=218 retransmission attempt=2
+loss_10: ACK seq=218 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_10: ACK seq=220 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: SHOOT seq=222 retransmission attempt=2
+loss_10: ACK seq=222 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_10: ACK seq=224 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=226 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=228 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=230 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=232 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=234 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=236 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=238 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=240 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=242 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=244 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=246 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=248 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=250 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=252 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: SHOOT seq=254 retransmission attempt=2
+loss_10: SHOOT seq=254 retransmission attempt=3
+loss_10: SHOOT seq=254 retransmission attempt=4
+loss_10: ACK seq=254 attempts=4 Karn_sample=False RTO=100,000 ms
+loss_10: ACK seq=256 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=258 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=260 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=262 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=264 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=266 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=268 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=270 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=272 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=274 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=276 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=278 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: SHOOT seq=280 retransmission attempt=2
+loss_10: ACK seq=280 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_10: ACK seq=282 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=284 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=286 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=288 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=290 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=292 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=294 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: SHOOT seq=296 retransmission attempt=2
+loss_10: ACK seq=296 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_10: ACK seq=298 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_10: ACK seq=300 attempts=1 Karn_sample=True RTO=100,000 ms
+RESULT loss_10: sent=50 delivered=50 first_attempt=44 first_attempt_percent=88.000000 retransmit_total=8 failed=0 failed_percent=0.000000 avg_attempts=1.160000 avg_time_to_ack_ms=17.821140 final_rto_ms=100.000000 max_attempts=4
+loss_20: SHOOT seq=302 retransmission attempt=2
+loss_20: ACK seq=302 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=304 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=306 retransmission attempt=2
+loss_20: ACK seq=306 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=308 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=310 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=312 retransmission attempt=2
+loss_20: SHOOT seq=312 retransmission attempt=3
+loss_20: SHOOT seq=312 retransmission attempt=4
+loss_20: SHOOT seq=312 retransmission attempt=5
+loss_20: SHOOT seq=312 delivery failed after 5 attempts
+loss_20: ACK seq=314 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=316 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=318 retransmission attempt=2
+loss_20: ACK seq=318 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: SHOOT seq=320 retransmission attempt=2
+loss_20: SHOOT seq=320 retransmission attempt=3
+loss_20: ACK seq=320 attempts=3 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=322 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=324 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=326 retransmission attempt=2
+loss_20: ACK seq=326 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: SHOOT seq=328 retransmission attempt=2
+loss_20: ACK seq=328 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=330 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=332 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=334 retransmission attempt=2
+loss_20: SHOOT seq=334 retransmission attempt=3
+loss_20: ACK seq=334 attempts=3 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=336 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=338 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=340 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=342 retransmission attempt=2
+loss_20: ACK seq=342 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=344 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=346 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=348 retransmission attempt=2
+loss_20: SHOOT seq=348 retransmission attempt=3
+loss_20: SHOOT seq=348 retransmission attempt=4
+loss_20: ACK seq=348 attempts=4 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=350 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=352 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=354 retransmission attempt=2
+loss_20: ACK seq=354 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=356 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=358 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=360 retransmission attempt=2
+loss_20: ACK seq=360 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=362 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=364 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=366 retransmission attempt=2
+loss_20: SHOOT seq=366 retransmission attempt=3
+loss_20: ACK seq=366 attempts=3 Karn_sample=False RTO=100,000 ms
+loss_20: SHOOT seq=368 retransmission attempt=2
+loss_20: SHOOT seq=368 retransmission attempt=3
+loss_20: ACK seq=368 attempts=3 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=370 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=372 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=374 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=376 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=378 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=380 retransmission attempt=2
+loss_20: ACK seq=380 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=382 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=384 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=386 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=388 retransmission attempt=2
+loss_20: ACK seq=388 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: SHOOT seq=390 retransmission attempt=2
+loss_20: ACK seq=390 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=392 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=394 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: ACK seq=396 attempts=1 Karn_sample=True RTO=100,000 ms
+loss_20: SHOOT seq=398 retransmission attempt=2
+loss_20: ACK seq=398 attempts=2 Karn_sample=False RTO=100,000 ms
+loss_20: ACK seq=400 attempts=1 Karn_sample=True RTO=100,000 ms
+RESULT loss_20: sent=50 delivered=49 first_attempt=32 first_attempt_percent=64.000000 retransmit_total=27 failed=1 failed_percent=2.000000 avg_attempts=1.540000 avg_time_to_ack_ms=51.257776 final_rto_ms=100.000000 max_attempts=5
+delay_100_loss_5: ACK seq=402 attempts=1 Karn_sample=True RTO=528,034 ms
+delay_100_loss_5: ACK seq=404 attempts=1 Karn_sample=True RTO=394,736 ms
+delay_100_loss_5: ACK seq=406 attempts=1 Karn_sample=True RTO=317,555 ms
+delay_100_loss_5: ACK seq=408 attempts=1 Karn_sample=True RTO=273,932 ms
+delay_100_loss_5: ACK seq=410 attempts=1 Karn_sample=True RTO=246,589 ms
+delay_100_loss_5: ACK seq=412 attempts=1 Karn_sample=True RTO=231,236 ms
+delay_100_loss_5: ACK seq=414 attempts=1 Karn_sample=True RTO=226,143 ms
+delay_100_loss_5: ACK seq=416 attempts=1 Karn_sample=True RTO=218,989 ms
+delay_100_loss_5: ACK seq=418 attempts=1 Karn_sample=True RTO=215,760 ms
+delay_100_loss_5: ACK seq=420 attempts=1 Karn_sample=True RTO=213,559 ms
+delay_100_loss_5: ACK seq=422 attempts=1 Karn_sample=True RTO=210,227 ms
+delay_100_loss_5: SHOOT seq=424 retransmission attempt=2
+delay_100_loss_5: SHOOT seq=424 retransmission attempt=3
+delay_100_loss_5: ACK seq=424 attempts=3 Karn_sample=False RTO=210,227 ms
+delay_100_loss_5: ACK seq=426 attempts=1 Karn_sample=True RTO=208,153 ms
+delay_100_loss_5: ACK seq=428 attempts=1 Karn_sample=True RTO=207,152 ms
+delay_100_loss_5: ACK seq=430 attempts=1 Karn_sample=True RTO=206,374 ms
+delay_100_loss_5: ACK seq=432 attempts=1 Karn_sample=True RTO=206,699 ms
+delay_100_loss_5: ACK seq=434 attempts=1 Karn_sample=True RTO=207,856 ms
+delay_100_loss_5: ACK seq=436 attempts=1 Karn_sample=True RTO=206,400 ms
+delay_100_loss_5: ACK seq=438 attempts=1 Karn_sample=True RTO=206,843 ms
+delay_100_loss_5: ACK seq=440 attempts=1 Karn_sample=True RTO=207,677 ms
+delay_100_loss_5: ACK seq=442 attempts=1 Karn_sample=True RTO=208,311 ms
+delay_100_loss_5: ACK seq=444 attempts=1 Karn_sample=True RTO=208,120 ms
+delay_100_loss_5: ACK seq=446 attempts=1 Karn_sample=True RTO=207,223 ms
+delay_100_loss_5: SHOOT seq=448 retransmission attempt=2
+delay_100_loss_5: ACK seq=448 attempts=2 Karn_sample=False RTO=206,451 ms
+delay_100_loss_5: ACK seq=450 attempts=1 Karn_sample=True RTO=205,837 ms
+delay_100_loss_5: SHOOT seq=452 retransmission attempt=2
+delay_100_loss_5: ACK seq=452 attempts=2 Karn_sample=False RTO=206,402 ms
+delay_100_loss_5: ACK seq=454 attempts=1 Karn_sample=True RTO=207,843 ms
+delay_100_loss_5: ACK seq=456 attempts=1 Karn_sample=True RTO=208,750 ms
+delay_100_loss_5: ACK seq=458 attempts=1 Karn_sample=True RTO=208,534 ms
+delay_100_loss_5: ACK seq=460 attempts=1 Karn_sample=True RTO=208,400 ms
+delay_100_loss_5: ACK seq=462 attempts=1 Karn_sample=True RTO=207,557 ms
+delay_100_loss_5: ACK seq=464 attempts=1 Karn_sample=True RTO=208,100 ms
+delay_100_loss_5: ACK seq=466 attempts=1 Karn_sample=True RTO=207,054 ms
+delay_100_loss_5: ACK seq=468 attempts=1 Karn_sample=True RTO=207,706 ms
+delay_100_loss_5: ACK seq=470 attempts=1 Karn_sample=True RTO=206,802 ms
+delay_100_loss_5: ACK seq=472 attempts=1 Karn_sample=True RTO=206,162 ms
+delay_100_loss_5: ACK seq=474 attempts=1 Karn_sample=True RTO=207,499 ms
+delay_100_loss_5: ACK seq=476 attempts=1 Karn_sample=True RTO=206,906 ms
+delay_100_loss_5: ACK seq=478 attempts=1 Karn_sample=True RTO=208,106 ms
+delay_100_loss_5: ACK seq=480 attempts=1 Karn_sample=True RTO=206,422 ms
+delay_100_loss_5: ACK seq=482 attempts=1 Karn_sample=True RTO=206,537 ms
+delay_100_loss_5: ACK seq=484 attempts=1 Karn_sample=True RTO=206,495 ms
+delay_100_loss_5: SHOOT seq=486 retransmission attempt=2
+delay_100_loss_5: ACK seq=486 attempts=2 Karn_sample=False RTO=206,086 ms
+delay_100_loss_5: ACK seq=488 attempts=1 Karn_sample=True RTO=206,375 ms
+delay_100_loss_5: ACK seq=490 attempts=1 Karn_sample=True RTO=206,507 ms
+delay_100_loss_5: ACK seq=492 attempts=1 Karn_sample=True RTO=208,595 ms
+delay_100_loss_5: ACK seq=494 attempts=1 Karn_sample=True RTO=208,160 ms
+delay_100_loss_5: ACK seq=496 attempts=1 Karn_sample=True RTO=207,075 ms
+delay_100_loss_5: SHOOT seq=498 retransmission attempt=2
+delay_100_loss_5: ACK seq=498 attempts=2 Karn_sample=False RTO=207,269 ms
+delay_100_loss_5: ACK seq=500 attempts=1 Karn_sample=True RTO=206,388 ms
+RESULT delay_100_loss_5: sent=50 delivered=50 first_attempt=45 first_attempt_percent=90.000000 retransmit_total=6 failed=0 failed_percent=0.000000 avg_attempts=1.120000 avg_time_to_ack_ms=230.854220 final_rto_ms=206.388199 max_attempts=3
+jitter_loss_10: ACK seq=502 attempts=1 Karn_sample=True RTO=425,476 ms
+jitter_loss_10: ACK seq=504 attempts=1 Karn_sample=True RTO=482,623 ms
+jitter_loss_10: ACK seq=506 attempts=1 Karn_sample=True RTO=418,173 ms
+jitter_loss_10: ACK seq=508 attempts=1 Karn_sample=True RTO=372,583 ms
+jitter_loss_10: SHOOT seq=510 retransmission attempt=2
+jitter_loss_10: ACK seq=510 attempts=2 Karn_sample=False RTO=472,402 ms
+jitter_loss_10: ACK seq=512 attempts=1 Karn_sample=True RTO=403,415 ms
+jitter_loss_10: ACK seq=514 attempts=1 Karn_sample=True RTO=422,540 ms
+jitter_loss_10: ACK seq=516 attempts=1 Karn_sample=True RTO=421,214 ms
+jitter_loss_10: ACK seq=518 attempts=1 Karn_sample=True RTO=399,779 ms
+jitter_loss_10: ACK seq=520 attempts=1 Karn_sample=True RTO=341,808 ms
+jitter_loss_10: ACK seq=522 attempts=1 Karn_sample=True RTO=295,891 ms
+jitter_loss_10: ACK seq=524 attempts=1 Karn_sample=True RTO=315,828 ms
+jitter_loss_10: ACK seq=526 attempts=1 Karn_sample=True RTO=310,897 ms
+jitter_loss_10: SHOOT seq=528 retransmission attempt=2
+jitter_loss_10: SHOOT seq=528 retransmission attempt=3
+jitter_loss_10: ACK seq=528 attempts=3 Karn_sample=False RTO=310,897 ms
+jitter_loss_10: ACK seq=530 attempts=1 Karn_sample=True RTO=339,520 ms
+jitter_loss_10: ACK seq=532 attempts=1 Karn_sample=True RTO=346,662 ms
+jitter_loss_10: ACK seq=534 attempts=1 Karn_sample=True RTO=317,194 ms
+jitter_loss_10: ACK seq=536 attempts=1 Karn_sample=True RTO=312,133 ms
+jitter_loss_10: SHOOT seq=538 retransmission attempt=2
+jitter_loss_10: ACK seq=538 attempts=2 Karn_sample=False RTO=340,193 ms
+jitter_loss_10: ACK seq=540 attempts=1 Karn_sample=True RTO=346,253 ms
+jitter_loss_10: ACK seq=542 attempts=1 Karn_sample=True RTO=285,321 ms
+jitter_loss_10: ACK seq=544 attempts=1 Karn_sample=True RTO=318,853 ms
+jitter_loss_10: SHOOT seq=546 retransmission attempt=2
+jitter_loss_10: ACK seq=546 attempts=2 Karn_sample=False RTO=326,711 ms
+jitter_loss_10: ACK seq=548 attempts=1 Karn_sample=True RTO=412,650 ms
+jitter_loss_10: ACK seq=550 attempts=1 Karn_sample=True RTO=356,913 ms
+jitter_loss_10: ACK seq=552 attempts=1 Karn_sample=True RTO=327,342 ms
+jitter_loss_10: ACK seq=554 attempts=1 Karn_sample=True RTO=368,366 ms
+jitter_loss_10: ACK seq=556 attempts=1 Karn_sample=True RTO=432,211 ms
+jitter_loss_10: ACK seq=558 attempts=1 Karn_sample=True RTO=418,960 ms
+jitter_loss_10: ACK seq=560 attempts=1 Karn_sample=True RTO=345,918 ms
+jitter_loss_10: ACK seq=562 attempts=1 Karn_sample=True RTO=288,022 ms
+jitter_loss_10: ACK seq=564 attempts=1 Karn_sample=True RTO=280,539 ms
+jitter_loss_10: ACK seq=566 attempts=1 Karn_sample=True RTO=260,399 ms
+jitter_loss_10: ACK seq=568 attempts=1 Karn_sample=True RTO=285,945 ms
+jitter_loss_10: ACK seq=570 attempts=1 Karn_sample=True RTO=302,147 ms
+jitter_loss_10: ACK seq=572 attempts=1 Karn_sample=True RTO=330,103 ms
+jitter_loss_10: ACK seq=574 attempts=1 Karn_sample=True RTO=322,290 ms
+jitter_loss_10: ACK seq=576 attempts=1 Karn_sample=True RTO=343,505 ms
+jitter_loss_10: SHOOT seq=578 retransmission attempt=2
+jitter_loss_10: ACK seq=578 attempts=2 Karn_sample=False RTO=399,338 ms
+jitter_loss_10: SHOOT seq=580 retransmission attempt=2
+jitter_loss_10: ACK seq=580 attempts=2 Karn_sample=False RTO=399,338 ms
+jitter_loss_10: SHOOT seq=582 retransmission attempt=2
+jitter_loss_10: ACK seq=582 attempts=2 Karn_sample=False RTO=368,294 ms
+jitter_loss_10: ACK seq=584 attempts=1 Karn_sample=True RTO=342,226 ms
+jitter_loss_10: ACK seq=586 attempts=1 Karn_sample=True RTO=360,985 ms
+jitter_loss_10: SHOOT seq=588 retransmission attempt=2
+jitter_loss_10: ACK seq=588 attempts=2 Karn_sample=False RTO=355,576 ms
+jitter_loss_10: SHOOT seq=590 retransmission attempt=2
+jitter_loss_10: ACK seq=590 attempts=2 Karn_sample=False RTO=388,203 ms
+jitter_loss_10: SHOOT seq=592 retransmission attempt=2
+jitter_loss_10: ACK seq=592 attempts=2 Karn_sample=False RTO=388,203 ms
+jitter_loss_10: SHOOT seq=594 retransmission attempt=2
+jitter_loss_10: ACK seq=594 attempts=2 Karn_sample=False RTO=384,311 ms
+jitter_loss_10: ACK seq=596 attempts=1 Karn_sample=True RTO=338,479 ms
+jitter_loss_10: ACK seq=598 attempts=1 Karn_sample=True RTO=300,803 ms
+jitter_loss_10: ACK seq=600 attempts=1 Karn_sample=True RTO=335,102 ms
+RESULT jitter_loss_10: sent=50 delivered=50 first_attempt=39 first_attempt_percent=78.000000 retransmit_total=12 failed=0 failed_percent=0.000000 avg_attempts=1.240000 avg_time_to_ack_ms=263.226080 final_rto_ms=335.102405 max_attempts=3
+CSV written: docs/reliability_samples.csv (300 reliable commands)
+CLIENT_EXIT 0

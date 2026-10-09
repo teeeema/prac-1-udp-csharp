@@ -1,0 +1,14 @@
+Latency experiment: 6 series x 50 PING, interval=200 ms, timeout=1000 ms
+baseline: sent=50 received=50 timeout=0 mean=0.527 ms srtt=0.612 ms jitter=0,242 ms loss=0,00%
+delay_50: sent=50 received=50 timeout=0 mean=52.323 ms srtt=52.199 ms jitter=0,500 ms loss=0,00%
+delay_100: sent=50 received=50 timeout=0 mean=102.260 ms srtt=102.110 ms jitter=0,591 ms loss=0,00%
+jitter: sent=50 received=50 timeout=0 mean=114.579 ms srtt=115.817 ms jitter=26,959 ms loss=0,00%
+loss_5: emulator dropped PING sample=5 seq=205
+loss_5: emulator dropped PING sample=33 seq=233
+loss_5: sent=50 received=48 timeout=2 mean=0.322 ms srtt=0.332 ms jitter=0,047 ms loss=4,00%
+combined: emulator dropped PING sample=3 seq=253
+combined: emulator dropped PING sample=17 seq=267
+combined: emulator dropped PING sample=47 seq=297
+combined: sent=50 received=47 timeout=3 mean=208.571 ms srtt=200.806 ms jitter=27,596 ms loss=6,00%
+CSV written: /var/folders/rz/g871p_vs07x0k9f3cck3qx_r0000gn/T/udp-pr2-regression-z1hie71v/latency_samples.csv (300 samples)
+PR2_REGRESSION PASS: rows=300, series=6, exit=0; original CSV preserved

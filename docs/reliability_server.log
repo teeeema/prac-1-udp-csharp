@@ -1,0 +1,600 @@
+[2026-10-09 10:48:03] authoritative UDP server listening on 0.0.0.0:60706
+[2026-10-09 10:48:03] command=PING seq=1 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:03] command=SHOOT seq=2 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=1
+[2026-10-09 10:48:03] command=PING seq=3 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:03] command=SHOOT seq=4 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=2
+[2026-10-09 10:48:03] command=PING seq=5 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:03] command=SHOOT seq=6 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=3
+[2026-10-09 10:48:03] command=PING seq=7 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:03] command=SHOOT seq=8 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=4
+[2026-10-09 10:48:04] command=PING seq=9 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=10 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=5
+[2026-10-09 10:48:04] command=PING seq=11 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=12 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=6
+[2026-10-09 10:48:04] command=PING seq=13 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=14 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=7
+[2026-10-09 10:48:04] command=PING seq=15 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=16 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=8
+[2026-10-09 10:48:04] command=PING seq=17 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=18 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=9
+[2026-10-09 10:48:04] command=PING seq=19 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=20 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=10
+[2026-10-09 10:48:04] command=PING seq=21 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=22 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=11
+[2026-10-09 10:48:04] command=PING seq=23 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=24 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=12
+[2026-10-09 10:48:04] command=PING seq=25 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=26 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=13
+[2026-10-09 10:48:04] command=PING seq=27 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=28 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=14
+[2026-10-09 10:48:04] command=PING seq=29 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=30 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=15
+[2026-10-09 10:48:04] command=PING seq=31 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=32 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=16
+[2026-10-09 10:48:04] command=PING seq=33 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=34 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=17
+[2026-10-09 10:48:04] command=PING seq=35 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=36 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=18
+[2026-10-09 10:48:04] command=PING seq=37 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=38 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=19
+[2026-10-09 10:48:04] command=PING seq=39 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=40 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=20
+[2026-10-09 10:48:04] command=PING seq=41 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:04] command=SHOOT seq=42 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=21
+[2026-10-09 10:48:05] command=PING seq=43 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=44 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=22
+[2026-10-09 10:48:05] command=PING seq=45 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=46 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=23
+[2026-10-09 10:48:05] command=PING seq=47 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=48 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=24
+[2026-10-09 10:48:05] command=PING seq=49 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=50 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=25
+[2026-10-09 10:48:05] command=PING seq=51 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=52 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=26
+[2026-10-09 10:48:05] command=PING seq=53 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=54 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=27
+[2026-10-09 10:48:05] command=PING seq=55 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=56 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=28
+[2026-10-09 10:48:05] command=PING seq=57 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=58 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=29
+[2026-10-09 10:48:05] command=PING seq=59 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=60 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=30
+[2026-10-09 10:48:05] command=PING seq=61 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=62 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=31
+[2026-10-09 10:48:05] command=PING seq=63 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=64 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=32
+[2026-10-09 10:48:05] command=PING seq=65 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=66 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=33
+[2026-10-09 10:48:05] command=PING seq=67 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=68 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=34
+[2026-10-09 10:48:05] command=PING seq=69 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=70 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=35
+[2026-10-09 10:48:05] command=PING seq=71 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=72 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=36
+[2026-10-09 10:48:05] command=PING seq=73 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=74 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=37
+[2026-10-09 10:48:05] command=PING seq=75 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:05] command=SHOOT seq=76 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=38
+[2026-10-09 10:48:06] command=PING seq=77 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=78 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=39
+[2026-10-09 10:48:06] command=PING seq=79 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=80 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=40
+[2026-10-09 10:48:06] command=PING seq=81 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=82 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=41
+[2026-10-09 10:48:06] command=PING seq=83 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=84 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=42
+[2026-10-09 10:48:06] command=PING seq=85 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=86 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=43
+[2026-10-09 10:48:06] command=PING seq=87 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=88 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=44
+[2026-10-09 10:48:06] command=PING seq=89 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=90 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=45
+[2026-10-09 10:48:06] command=PING seq=91 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=92 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=46
+[2026-10-09 10:48:06] command=PING seq=93 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=94 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=47
+[2026-10-09 10:48:06] command=PING seq=95 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=96 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=48
+[2026-10-09 10:48:06] command=PING seq=97 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=98 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=49
+[2026-10-09 10:48:06] command=PING seq=99 from=127.0.0.1:52986 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=100 from=127.0.0.1:52986 duplicate=False result=ACCEPTED state=(0,0,0) shots=50
+[2026-10-09 10:48:06] command=PING seq=101 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=102 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=1
+[2026-10-09 10:48:06] command=PING seq=103 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=104 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=2
+[2026-10-09 10:48:06] command=PING seq=105 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=106 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=3
+[2026-10-09 10:48:06] command=PING seq=107 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=108 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=4
+[2026-10-09 10:48:06] command=PING seq=109 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=110 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=5
+[2026-10-09 10:48:06] command=PING seq=111 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:06] command=SHOOT seq=112 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=6
+[2026-10-09 10:48:07] command=PING seq=113 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:08] command=SHOOT seq=114 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=7
+[2026-10-09 10:48:08] command=PING seq=115 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:08] command=SHOOT seq=116 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=8
+[2026-10-09 10:48:08] command=PING seq=117 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:08] command=SHOOT seq=118 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=9
+[2026-10-09 10:48:09] command=SHOOT seq=120 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=10
+[2026-10-09 10:48:09] command=PING seq=121 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:09] command=SHOOT seq=122 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=11
+[2026-10-09 10:48:10] command=SHOOT seq=124 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=12
+[2026-10-09 10:48:10] command=SHOOT seq=124 from=127.0.0.1:60856 duplicate=True result=ACCEPTED state=(0,0,0) shots=12
+[2026-10-09 10:48:10] command=PING seq=125 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:10] command=SHOOT seq=126 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=13
+[2026-10-09 10:48:10] command=PING seq=127 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:10] command=SHOOT seq=128 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=14
+[2026-10-09 10:48:10] command=PING seq=129 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:10] command=SHOOT seq=130 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=15
+[2026-10-09 10:48:10] command=PING seq=131 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:10] command=SHOOT seq=132 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=16
+[2026-10-09 10:48:10] command=PING seq=133 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:10] command=SHOOT seq=134 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=17
+[2026-10-09 10:48:10] command=PING seq=135 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:10] command=SHOOT seq=136 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=18
+[2026-10-09 10:48:10] command=PING seq=137 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:10] command=SHOOT seq=138 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=19
+[2026-10-09 10:48:11] command=PING seq=139 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:12] command=SHOOT seq=140 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=20
+[2026-10-09 10:48:12] command=PING seq=141 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:12] command=SHOOT seq=142 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=21
+[2026-10-09 10:48:12] command=PING seq=143 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:12] command=SHOOT seq=144 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=22
+[2026-10-09 10:48:12] command=PING seq=145 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:12] command=SHOOT seq=146 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=23
+[2026-10-09 10:48:12] command=PING seq=147 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:12] command=SHOOT seq=148 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=24
+[2026-10-09 10:48:12] command=PING seq=149 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:12] command=SHOOT seq=150 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=25
+[2026-10-09 10:48:12] command=PING seq=151 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:12] command=SHOOT seq=152 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=26
+[2026-10-09 10:48:12] command=SHOOT seq=152 from=127.0.0.1:60856 duplicate=True result=ACCEPTED state=(0,0,0) shots=26
+[2026-10-09 10:48:13] command=SHOOT seq=154 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=27
+[2026-10-09 10:48:13] command=PING seq=155 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:13] command=SHOOT seq=156 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=28
+[2026-10-09 10:48:13] command=PING seq=157 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:13] command=SHOOT seq=158 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=29
+[2026-10-09 10:48:13] command=PING seq=159 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:13] command=SHOOT seq=160 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=30
+[2026-10-09 10:48:13] command=PING seq=161 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:13] command=SHOOT seq=162 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=31
+[2026-10-09 10:48:13] command=PING seq=163 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:13] command=SHOOT seq=164 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=32
+[2026-10-09 10:48:14] command=PING seq=165 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=166 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=33
+[2026-10-09 10:48:14] command=PING seq=167 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=168 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=34
+[2026-10-09 10:48:14] command=PING seq=169 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=170 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=35
+[2026-10-09 10:48:14] command=PING seq=171 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=172 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=36
+[2026-10-09 10:48:14] command=PING seq=173 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=174 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=37
+[2026-10-09 10:48:14] command=PING seq=175 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=176 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=38
+[2026-10-09 10:48:14] command=PING seq=177 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=178 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=39
+[2026-10-09 10:48:14] command=PING seq=179 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=180 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=40
+[2026-10-09 10:48:14] command=PING seq=181 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=182 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=41
+[2026-10-09 10:48:14] command=PING seq=183 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=184 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=42
+[2026-10-09 10:48:14] command=PING seq=185 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=186 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=43
+[2026-10-09 10:48:14] command=PING seq=187 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=188 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=44
+[2026-10-09 10:48:14] command=PING seq=189 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=190 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=45
+[2026-10-09 10:48:14] command=PING seq=191 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=192 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=46
+[2026-10-09 10:48:14] command=PING seq=193 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=194 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=47
+[2026-10-09 10:48:14] command=PING seq=195 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:14] command=SHOOT seq=196 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=48
+[2026-10-09 10:48:15] command=PING seq=197 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:15] command=SHOOT seq=198 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=49
+[2026-10-09 10:48:15] command=PING seq=199 from=127.0.0.1:60856 result=PONG
+[2026-10-09 10:48:15] command=SHOOT seq=200 from=127.0.0.1:60856 duplicate=False result=ACCEPTED state=(0,0,0) shots=50
+[2026-10-09 10:48:15] command=PING seq=201 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:15] command=SHOOT seq=202 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=1
+[2026-10-09 10:48:15] command=PING seq=203 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:15] command=SHOOT seq=204 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=2
+[2026-10-09 10:48:15] command=PING seq=205 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:15] command=SHOOT seq=206 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=3
+[2026-10-09 10:48:15] command=PING seq=207 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:15] command=SHOOT seq=208 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=4
+[2026-10-09 10:48:15] command=PING seq=209 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:15] command=SHOOT seq=210 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=5
+[2026-10-09 10:48:15] command=PING seq=211 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:15] command=SHOOT seq=212 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=6
+[2026-10-09 10:48:15] command=PING seq=213 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:16] command=SHOOT seq=214 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=7
+[2026-10-09 10:48:16] command=PING seq=215 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:16] command=SHOOT seq=216 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=8
+[2026-10-09 10:48:16] command=PING seq=217 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:16] command=SHOOT seq=218 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=9
+[2026-10-09 10:48:16] command=PING seq=219 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:16] command=SHOOT seq=220 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=10
+[2026-10-09 10:48:18] command=SHOOT seq=222 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=11
+[2026-10-09 10:48:18] command=PING seq=223 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:19] command=SHOOT seq=224 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=12
+[2026-10-09 10:48:19] command=PING seq=225 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:19] command=SHOOT seq=226 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=13
+[2026-10-09 10:48:19] command=PING seq=227 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:19] command=SHOOT seq=228 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=14
+[2026-10-09 10:48:19] command=PING seq=229 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:19] command=SHOOT seq=230 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=15
+[2026-10-09 10:48:19] command=PING seq=231 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:19] command=SHOOT seq=232 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=16
+[2026-10-09 10:48:19] command=PING seq=233 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:19] command=SHOOT seq=234 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=17
+[2026-10-09 10:48:20] command=SHOOT seq=236 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=18
+[2026-10-09 10:48:20] command=PING seq=237 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:20] command=SHOOT seq=238 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=19
+[2026-10-09 10:48:20] command=PING seq=239 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:20] command=SHOOT seq=240 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=20
+[2026-10-09 10:48:20] command=PING seq=241 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:20] command=SHOOT seq=242 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=21
+[2026-10-09 10:48:20] command=PING seq=243 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:20] command=SHOOT seq=244 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=22
+[2026-10-09 10:48:20] command=PING seq=245 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:20] command=SHOOT seq=246 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=23
+[2026-10-09 10:48:21] command=SHOOT seq=248 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=24
+[2026-10-09 10:48:21] command=PING seq=249 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:21] command=SHOOT seq=250 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=25
+[2026-10-09 10:48:21] command=PING seq=251 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:21] command=SHOOT seq=252 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=26
+[2026-10-09 10:48:22] command=PING seq=253 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:22] command=SHOOT seq=254 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=27
+[2026-10-09 10:48:22] command=SHOOT seq=254 from=127.0.0.1:57037 duplicate=True result=ACCEPTED state=(0,0,0) shots=27
+[2026-10-09 10:48:22] command=SHOOT seq=254 from=127.0.0.1:57037 duplicate=True result=ACCEPTED state=(0,0,0) shots=27
+[2026-10-09 10:48:22] command=PING seq=255 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:22] command=SHOOT seq=256 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=28
+[2026-10-09 10:48:23] command=SHOOT seq=258 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=29
+[2026-10-09 10:48:23] command=PING seq=259 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:23] command=SHOOT seq=260 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=30
+[2026-10-09 10:48:23] command=PING seq=261 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:23] command=SHOOT seq=262 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=31
+[2026-10-09 10:48:23] command=PING seq=263 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:23] command=SHOOT seq=264 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=32
+[2026-10-09 10:48:23] command=PING seq=265 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:23] command=SHOOT seq=266 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=33
+[2026-10-09 10:48:23] command=PING seq=267 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:23] command=SHOOT seq=268 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=34
+[2026-10-09 10:48:23] command=PING seq=269 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:23] command=SHOOT seq=270 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=35
+[2026-10-09 10:48:23] command=PING seq=271 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:23] command=SHOOT seq=272 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=36
+[2026-10-09 10:48:23] command=PING seq=273 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:23] command=SHOOT seq=274 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=37
+[2026-10-09 10:48:24] command=PING seq=275 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:24] command=SHOOT seq=276 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=38
+[2026-10-09 10:48:24] command=PING seq=277 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:24] command=SHOOT seq=278 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=39
+[2026-10-09 10:48:24] command=PING seq=279 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:24] command=SHOOT seq=280 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=40
+[2026-10-09 10:48:24] command=PING seq=281 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:24] command=SHOOT seq=282 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=41
+[2026-10-09 10:48:25] command=SHOOT seq=284 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=42
+[2026-10-09 10:48:26] command=SHOOT seq=286 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=43
+[2026-10-09 10:48:26] command=PING seq=287 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:26] command=SHOOT seq=288 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=44
+[2026-10-09 10:48:26] command=PING seq=289 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:26] command=SHOOT seq=290 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=45
+[2026-10-09 10:48:26] command=PING seq=291 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:26] command=SHOOT seq=292 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=46
+[2026-10-09 10:48:27] command=SHOOT seq=294 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=47
+[2026-10-09 10:48:27] command=PING seq=295 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:28] command=SHOOT seq=296 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=48
+[2026-10-09 10:48:28] command=PING seq=297 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:28] command=SHOOT seq=298 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=49
+[2026-10-09 10:48:28] command=PING seq=299 from=127.0.0.1:57037 result=PONG
+[2026-10-09 10:48:29] command=SHOOT seq=300 from=127.0.0.1:57037 duplicate=False result=ACCEPTED state=(0,0,0) shots=50
+[2026-10-09 10:48:29] command=PING seq=301 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:30] command=SHOOT seq=302 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=1
+[2026-10-09 10:48:30] command=PING seq=303 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:30] command=SHOOT seq=304 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=2
+[2026-10-09 10:48:30] command=PING seq=305 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:31] command=SHOOT seq=306 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=3
+[2026-10-09 10:48:31] command=SHOOT seq=306 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=3
+[2026-10-09 10:48:32] command=SHOOT seq=308 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=4
+[2026-10-09 10:48:33] command=SHOOT seq=310 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=5
+[2026-10-09 10:48:33] command=PING seq=311 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:34] command=SHOOT seq=312 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=6
+[2026-10-09 10:48:34] command=SHOOT seq=312 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=6
+[2026-10-09 10:48:34] command=SHOOT seq=312 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=6
+[2026-10-09 10:48:34] command=SHOOT seq=312 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=6
+[2026-10-09 10:48:36] command=SHOOT seq=314 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=7
+[2026-10-09 10:48:36] command=PING seq=315 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:36] command=SHOOT seq=316 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=8
+[2026-10-09 10:48:37] command=SHOOT seq=318 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=9
+[2026-10-09 10:48:37] command=PING seq=319 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:37] command=SHOOT seq=320 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=10
+[2026-10-09 10:48:37] command=SHOOT seq=320 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=10
+[2026-10-09 10:48:37] command=PING seq=321 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:37] command=SHOOT seq=322 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=11
+[2026-10-09 10:48:37] command=PING seq=323 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:37] command=SHOOT seq=324 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=12
+[2026-10-09 10:48:38] command=SHOOT seq=326 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=13
+[2026-10-09 10:48:38] command=SHOOT seq=326 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=13
+[2026-10-09 10:48:38] command=PING seq=327 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:40] command=SHOOT seq=328 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=14
+[2026-10-09 10:48:40] command=PING seq=329 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:41] command=SHOOT seq=330 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=15
+[2026-10-09 10:48:41] command=PING seq=331 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:42] command=SHOOT seq=332 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=16
+[2026-10-09 10:48:43] command=SHOOT seq=334 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=17
+[2026-10-09 10:48:43] command=SHOOT seq=334 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=17
+[2026-10-09 10:48:43] command=SHOOT seq=334 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=17
+[2026-10-09 10:48:43] command=PING seq=335 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:43] command=SHOOT seq=336 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=18
+[2026-10-09 10:48:44] command=SHOOT seq=338 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=19
+[2026-10-09 10:48:44] command=PING seq=339 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:44] command=SHOOT seq=340 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=20
+[2026-10-09 10:48:44] command=PING seq=341 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:44] command=SHOOT seq=342 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=21
+[2026-10-09 10:48:45] command=SHOOT seq=344 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=22
+[2026-10-09 10:48:45] command=PING seq=345 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:45] command=SHOOT seq=346 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=23
+[2026-10-09 10:48:46] command=PING seq=347 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:46] command=SHOOT seq=348 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=24
+[2026-10-09 10:48:46] command=SHOOT seq=348 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=24
+[2026-10-09 10:48:46] command=PING seq=349 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:46] command=SHOOT seq=350 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=25
+[2026-10-09 10:48:46] command=PING seq=351 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:46] command=SHOOT seq=352 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=26
+[2026-10-09 10:48:46] command=PING seq=353 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:46] command=SHOOT seq=354 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=27
+[2026-10-09 10:48:46] command=SHOOT seq=354 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=27
+[2026-10-09 10:48:47] command=SHOOT seq=356 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=28
+[2026-10-09 10:48:47] command=PING seq=357 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:47] command=SHOOT seq=358 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=29
+[2026-10-09 10:48:47] command=PING seq=359 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:47] command=SHOOT seq=360 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=30
+[2026-10-09 10:48:47] command=SHOOT seq=360 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=30
+[2026-10-09 10:48:47] command=PING seq=361 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:48] command=SHOOT seq=362 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=31
+[2026-10-09 10:48:49] command=PING seq=363 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:49] command=SHOOT seq=364 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=32
+[2026-10-09 10:48:49] command=PING seq=365 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:49] command=SHOOT seq=366 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=33
+[2026-10-09 10:48:49] command=SHOOT seq=366 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=33
+[2026-10-09 10:48:49] command=PING seq=367 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:49] command=SHOOT seq=368 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=34
+[2026-10-09 10:48:49] command=SHOOT seq=368 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=34
+[2026-10-09 10:48:50] command=SHOOT seq=370 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=35
+[2026-10-09 10:48:50] command=PING seq=371 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:51] command=SHOOT seq=372 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=36
+[2026-10-09 10:48:51] command=PING seq=373 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:51] command=SHOOT seq=374 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=37
+[2026-10-09 10:48:51] command=PING seq=375 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:51] command=SHOOT seq=376 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=38
+[2026-10-09 10:48:52] command=SHOOT seq=378 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=39
+[2026-10-09 10:48:52] command=PING seq=379 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:53] command=SHOOT seq=380 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=40
+[2026-10-09 10:48:53] command=PING seq=381 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:53] command=SHOOT seq=382 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=41
+[2026-10-09 10:48:53] command=PING seq=383 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:54] command=SHOOT seq=384 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=42
+[2026-10-09 10:48:54] command=PING seq=385 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:54] command=SHOOT seq=386 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=43
+[2026-10-09 10:48:54] command=PING seq=387 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:55] command=SHOOT seq=388 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=44
+[2026-10-09 10:48:55] command=PING seq=389 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:55] command=SHOOT seq=390 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=45
+[2026-10-09 10:48:55] command=PING seq=391 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:55] command=SHOOT seq=392 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=46
+[2026-10-09 10:48:55] command=PING seq=393 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:55] command=SHOOT seq=394 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=47
+[2026-10-09 10:48:55] command=PING seq=395 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:55] command=SHOOT seq=396 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=48
+[2026-10-09 10:48:55] command=PING seq=397 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:55] command=SHOOT seq=398 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=49
+[2026-10-09 10:48:55] command=SHOOT seq=398 from=127.0.0.1:52877 duplicate=True result=ACCEPTED state=(0,0,0) shots=49
+[2026-10-09 10:48:55] command=PING seq=399 from=127.0.0.1:52877 result=PONG
+[2026-10-09 10:48:55] command=SHOOT seq=400 from=127.0.0.1:52877 duplicate=False result=ACCEPTED state=(0,0,0) shots=50
+[2026-10-09 10:48:56] command=PING seq=401 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:48:56] command=SHOOT seq=402 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=1
+[2026-10-09 10:48:56] command=PING seq=403 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:48:56] command=SHOOT seq=404 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=2
+[2026-10-09 10:48:56] command=PING seq=405 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:48:57] command=SHOOT seq=406 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=3
+[2026-10-09 10:48:57] command=PING seq=407 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:48:57] command=SHOOT seq=408 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=4
+[2026-10-09 10:48:57] command=PING seq=409 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:48:58] command=SHOOT seq=410 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=5
+[2026-10-09 10:48:58] command=PING seq=411 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:48:58] command=SHOOT seq=412 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=6
+[2026-10-09 10:48:58] command=PING seq=413 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:48:59] command=SHOOT seq=414 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=7
+[2026-10-09 10:49:00] command=PING seq=415 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:00] command=SHOOT seq=416 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=8
+[2026-10-09 10:49:00] command=PING seq=417 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:00] command=SHOOT seq=418 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=9
+[2026-10-09 10:49:02] command=SHOOT seq=420 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=10
+[2026-10-09 10:49:02] command=PING seq=421 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:02] command=SHOOT seq=422 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=11
+[2026-10-09 10:49:04] command=SHOOT seq=424 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=12
+[2026-10-09 10:49:04] command=SHOOT seq=424 from=127.0.0.1:49273 duplicate=True result=ACCEPTED state=(0,0,0) shots=12
+[2026-10-09 10:49:04] command=PING seq=425 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:04] command=SHOOT seq=426 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=13
+[2026-10-09 10:49:04] command=PING seq=427 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:05] command=SHOOT seq=428 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=14
+[2026-10-09 10:49:05] command=PING seq=429 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:05] command=SHOOT seq=430 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=15
+[2026-10-09 10:49:05] command=PING seq=431 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:06] command=SHOOT seq=432 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=16
+[2026-10-09 10:49:06] command=PING seq=433 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:06] command=SHOOT seq=434 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=17
+[2026-10-09 10:49:06] command=PING seq=435 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:07] command=SHOOT seq=436 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=18
+[2026-10-09 10:49:07] command=PING seq=437 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:07] command=SHOOT seq=438 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=19
+[2026-10-09 10:49:07] command=PING seq=439 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:08] command=SHOOT seq=440 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=20
+[2026-10-09 10:49:09] command=PING seq=441 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:09] command=SHOOT seq=442 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=21
+[2026-10-09 10:49:09] command=PING seq=443 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:09] command=SHOOT seq=444 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=22
+[2026-10-09 10:49:09] command=PING seq=445 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:10] command=SHOOT seq=446 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=23
+[2026-10-09 10:49:10] command=PING seq=447 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:10] command=SHOOT seq=448 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=24
+[2026-10-09 10:49:11] command=PING seq=449 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:11] command=SHOOT seq=450 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=25
+[2026-10-09 10:49:11] command=PING seq=451 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:11] command=SHOOT seq=452 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=26
+[2026-10-09 10:49:12] command=SHOOT seq=452 from=127.0.0.1:49273 duplicate=True result=ACCEPTED state=(0,0,0) shots=26
+[2026-10-09 10:49:13] command=SHOOT seq=454 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=27
+[2026-10-09 10:49:13] command=PING seq=455 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:13] command=SHOOT seq=456 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=28
+[2026-10-09 10:49:14] command=PING seq=457 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:14] command=SHOOT seq=458 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=29
+[2026-10-09 10:49:14] command=PING seq=459 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:14] command=SHOOT seq=460 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=30
+[2026-10-09 10:49:14] command=PING seq=461 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:15] command=SHOOT seq=462 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=31
+[2026-10-09 10:49:15] command=PING seq=463 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:15] command=SHOOT seq=464 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=32
+[2026-10-09 10:49:15] command=PING seq=465 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:16] command=SHOOT seq=466 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=33
+[2026-10-09 10:49:16] command=PING seq=467 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:16] command=SHOOT seq=468 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=34
+[2026-10-09 10:49:16] command=PING seq=469 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:16] command=SHOOT seq=470 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=35
+[2026-10-09 10:49:17] command=PING seq=471 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:17] command=SHOOT seq=472 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=36
+[2026-10-09 10:49:17] command=PING seq=473 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:17] command=SHOOT seq=474 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=37
+[2026-10-09 10:49:18] command=PING seq=475 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:18] command=SHOOT seq=476 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=38
+[2026-10-09 10:49:18] command=PING seq=477 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:18] command=SHOOT seq=478 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=39
+[2026-10-09 10:49:19] command=PING seq=479 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:19] command=SHOOT seq=480 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=40
+[2026-10-09 10:49:19] command=PING seq=481 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:19] command=SHOOT seq=482 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=41
+[2026-10-09 10:49:20] command=PING seq=483 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:20] command=SHOOT seq=484 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=42
+[2026-10-09 10:49:20] command=PING seq=485 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:20] command=SHOOT seq=486 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=43
+[2026-10-09 10:49:21] command=PING seq=487 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:21] command=SHOOT seq=488 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=44
+[2026-10-09 10:49:21] command=PING seq=489 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:21] command=SHOOT seq=490 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=45
+[2026-10-09 10:49:22] command=PING seq=491 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:22] command=SHOOT seq=492 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=46
+[2026-10-09 10:49:22] command=PING seq=493 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:22] command=SHOOT seq=494 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=47
+[2026-10-09 10:49:23] command=PING seq=495 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:23] command=SHOOT seq=496 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=48
+[2026-10-09 10:49:23] command=PING seq=497 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:23] command=SHOOT seq=498 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=49
+[2026-10-09 10:49:24] command=PING seq=499 from=127.0.0.1:49273 result=PONG
+[2026-10-09 10:49:24] command=SHOOT seq=500 from=127.0.0.1:49273 duplicate=False result=ACCEPTED state=(0,0,0) shots=50
+[2026-10-09 10:49:24] command=PING seq=501 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:24] command=SHOOT seq=502 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=1
+[2026-10-09 10:49:25] command=PING seq=503 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:25] command=SHOOT seq=504 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=2
+[2026-10-09 10:49:25] command=PING seq=505 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:25] command=SHOOT seq=506 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=3
+[2026-10-09 10:49:25] command=PING seq=507 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:26] command=SHOOT seq=508 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=4
+[2026-10-09 10:49:27] command=PING seq=509 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:27] command=SHOOT seq=510 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=5
+[2026-10-09 10:49:29] command=SHOOT seq=512 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=6
+[2026-10-09 10:49:29] command=PING seq=513 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:29] command=SHOOT seq=514 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=7
+[2026-10-09 10:49:29] command=PING seq=515 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:30] command=SHOOT seq=516 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=8
+[2026-10-09 10:49:30] command=PING seq=517 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:30] command=SHOOT seq=518 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=9
+[2026-10-09 10:49:30] command=PING seq=519 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:30] command=SHOOT seq=520 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=10
+[2026-10-09 10:49:30] command=PING seq=521 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:31] command=SHOOT seq=522 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=11
+[2026-10-09 10:49:31] command=PING seq=523 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:31] command=SHOOT seq=524 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=12
+[2026-10-09 10:49:31] command=PING seq=525 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:31] command=SHOOT seq=526 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=13
+[2026-10-09 10:49:31] command=PING seq=527 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:33] command=SHOOT seq=528 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=14
+[2026-10-09 10:49:33] command=SHOOT seq=528 from=127.0.0.1:52537 duplicate=True result=ACCEPTED state=(0,0,0) shots=14
+[2026-10-09 10:49:34] command=SHOOT seq=530 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=15
+[2026-10-09 10:49:35] command=PING seq=531 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:35] command=SHOOT seq=532 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=16
+[2026-10-09 10:49:35] command=PING seq=533 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:35] command=SHOOT seq=534 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=17
+[2026-10-09 10:49:35] command=PING seq=535 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:36] command=SHOOT seq=536 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=18
+[2026-10-09 10:49:36] command=PING seq=537 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:36] command=SHOOT seq=538 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=19
+[2026-10-09 10:49:36] command=SHOOT seq=538 from=127.0.0.1:52537 duplicate=True result=ACCEPTED state=(0,0,0) shots=19
+[2026-10-09 10:49:37] command=PING seq=539 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:37] command=SHOOT seq=540 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=20
+[2026-10-09 10:49:37] command=PING seq=541 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:37] command=SHOOT seq=542 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=21
+[2026-10-09 10:49:37] command=PING seq=543 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:37] command=SHOOT seq=544 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=22
+[2026-10-09 10:49:38] command=PING seq=545 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:38] command=SHOOT seq=546 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=23
+[2026-10-09 10:49:38] command=SHOOT seq=546 from=127.0.0.1:52537 duplicate=True result=ACCEPTED state=(0,0,0) shots=23
+[2026-10-09 10:49:39] command=SHOOT seq=548 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=24
+[2026-10-09 10:49:40] command=PING seq=549 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:40] command=SHOOT seq=550 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=25
+[2026-10-09 10:49:40] command=PING seq=551 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:40] command=SHOOT seq=552 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=26
+[2026-10-09 10:49:40] command=PING seq=553 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:41] command=SHOOT seq=554 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=27
+[2026-10-09 10:49:41] command=PING seq=555 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:41] command=SHOOT seq=556 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=28
+[2026-10-09 10:49:41] command=PING seq=557 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:42] command=SHOOT seq=558 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=29
+[2026-10-09 10:49:42] command=PING seq=559 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:42] command=SHOOT seq=560 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=30
+[2026-10-09 10:49:42] command=PING seq=561 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:42] command=SHOOT seq=562 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=31
+[2026-10-09 10:49:43] command=PING seq=563 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:43] command=SHOOT seq=564 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=32
+[2026-10-09 10:49:43] command=PING seq=565 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:43] command=SHOOT seq=566 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=33
+[2026-10-09 10:49:43] command=PING seq=567 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:44] command=SHOOT seq=568 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=34
+[2026-10-09 10:49:44] command=PING seq=569 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:45] command=SHOOT seq=570 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=35
+[2026-10-09 10:49:45] command=PING seq=571 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:45] command=SHOOT seq=572 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=36
+[2026-10-09 10:49:45] command=PING seq=573 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:46] command=SHOOT seq=574 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=37
+[2026-10-09 10:49:46] command=PING seq=575 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:46] command=SHOOT seq=576 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=38
+[2026-10-09 10:49:46] command=PING seq=577 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:47] command=SHOOT seq=578 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=39
+[2026-10-09 10:49:47] command=PING seq=579 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:48] command=SHOOT seq=580 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=40
+[2026-10-09 10:49:49] command=SHOOT seq=580 from=127.0.0.1:52537 duplicate=True result=ACCEPTED state=(0,0,0) shots=40
+[2026-10-09 10:49:49] command=PING seq=581 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:49] command=SHOOT seq=582 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=41
+[2026-10-09 10:49:49] command=SHOOT seq=582 from=127.0.0.1:52537 duplicate=True result=ACCEPTED state=(0,0,0) shots=41
+[2026-10-09 10:49:51] command=SHOOT seq=584 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=42
+[2026-10-09 10:49:51] command=PING seq=585 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:51] command=SHOOT seq=586 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=43
+[2026-10-09 10:49:51] command=PING seq=587 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:51] command=SHOOT seq=588 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=44
+[2026-10-09 10:49:52] command=SHOOT seq=588 from=127.0.0.1:52537 duplicate=True result=ACCEPTED state=(0,0,0) shots=44
+[2026-10-09 10:49:52] command=PING seq=589 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:52] command=SHOOT seq=590 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=45
+[2026-10-09 10:49:53] command=SHOOT seq=590 from=127.0.0.1:52537 duplicate=True result=ACCEPTED state=(0,0,0) shots=45
+[2026-10-09 10:49:54] command=SHOOT seq=592 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=46
+[2026-10-09 10:49:54] command=SHOOT seq=592 from=127.0.0.1:52537 duplicate=True result=ACCEPTED state=(0,0,0) shots=46
+[2026-10-09 10:49:54] command=PING seq=593 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:55] command=SHOOT seq=594 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=47
+[2026-10-09 10:49:55] command=SHOOT seq=594 from=127.0.0.1:52537 duplicate=True result=ACCEPTED state=(0,0,0) shots=47
+[2026-10-09 10:49:56] command=SHOOT seq=596 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=48
+[2026-10-09 10:49:56] command=PING seq=597 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:57] command=SHOOT seq=598 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=49
+[2026-10-09 10:49:57] command=PING seq=599 from=127.0.0.1:52537 result=PONG
+[2026-10-09 10:49:58] command=SHOOT seq=600 from=127.0.0.1:52537 duplicate=False result=ACCEPTED state=(0,0,0) shots=50

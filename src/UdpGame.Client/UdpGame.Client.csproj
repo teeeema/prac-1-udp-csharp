@@ -1,6 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\UdpGame.Reliability\UdpGame.Reliability.csproj" />
     <ProjectReference Include="..\UdpGame.Protocol\UdpGame.Protocol.csproj" />
     <ProjectReference Include="..\UdpGame.Telemetry\UdpGame.Telemetry.csproj" />
     <ProjectReference Include="..\UdpGame.Transport\UdpGame.Transport.csproj" />
