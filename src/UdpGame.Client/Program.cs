@@ -1,6 +1,8 @@
 using System.Net;
 using System.Net.Sockets;
 using UdpGame.Protocol;
+using UdpGame.Transport;
+using UdpGame.Telemetry;
 
 namespace UdpGame.Client;
 
@@ -11,14 +13,18 @@ internal static class Program
         try
         {
             ClientOptions options = ParseOptions(args);
+            if (options.ReliabilityExperiment)
+            {
+                return ReliabilityExperimentRunner.Run(options.Host, options.Port,
+                    options.CsvPath ?? "docs/reliability_samples.csv");
+            }
             if (options.Experiment)
             {
-                return ExperimentRunner.Run(options.Host, options.Port, options.CsvPath);
+                return ExperimentRunner.Run(options.Host, options.Port, options.CsvPath ?? "docs/latency_samples.csv");
             }
 
-            using var udp = new UdpClient();
-            udp.Client.ReceiveTimeout = options.TimeoutMilliseconds;
-            udp.Connect(options.Host, options.Port);
+            using var transport = UdpTransport.Connect(options.Host, options.Port, 20);
+            var delivery = new ClientDeliveryTracker();
 
             int responsesReceived = 0;
             Console.WriteLine(
@@ -27,47 +33,60 @@ internal static class Program
             for (int index = 0; index < options.Count; index++)
             {
                 ushort sequenceNumber = checked((ushort)(index + 1));
-                byte[] datagram;
-
                 if (index % 2 == 0)
                 {
                     float step = index / 2 + 1;
                     var movement = new Movement(step, step * 2f, step * -0.5f);
-                    datagram = ProtocolSerializer.SerializeMovement(sequenceNumber, movement);
-                    Console.WriteLine(
-                        $"Sent MOVEMENT seq={sequenceNumber} " +
-                        $"position=({movement.X}, {movement.Y}, {movement.Z})");
+                    transport.Send(ProtocolSerializer.SerializeMovement(sequenceNumber, movement));
+                    Console.WriteLine($"Sent MOVEMENT seq={sequenceNumber} position=({movement.X}, {movement.Y}, {movement.Z})");
+                    ulong deadline = MonotonicClock.NowMicroseconds() + (ulong)options.TimeoutMilliseconds * 1000UL;
+                    bool received = false;
+                    while (MonotonicClock.NowMicroseconds() < deadline && !received)
+                    {
+                        try
+                        {
+                            var sender = new IPEndPoint(IPAddress.Any, 0);
+                            Packet response = ProtocolSerializer.Deserialize(transport.Receive(ref sender));
+                            if (response.Payload is AckPayload ack)
+                            {
+                                delivery.OnAck(ack, MonotonicClock.NowMicroseconds());
+                            }
+                            else if (response.Header.SequenceNumber == sequenceNumber && response.Payload is StateUpdate)
+                            {
+                                PrintResponse(response);
+                                responsesReceived++;
+                                received = true;
+                            }
+                        }
+                        catch (SocketException error) when (error.SocketErrorCode is SocketError.TimedOut or SocketError.WouldBlock)
+                        {
+                        }
+                        catch (ProtocolException error)
+                        {
+                            Console.Error.WriteLine($"Malformed response ignored: {error.Message}");
+                        }
+                    }
+                    if (!received)
+                    {
+                        Console.Error.WriteLine($"Timeout waiting for response to seq={sequenceNumber}");
+                    }
                 }
                 else
                 {
                     byte weaponId = (byte)(((index / 2) % 3) + 1);
-                    datagram = ProtocolSerializer.SerializeShoot(
-                        sequenceNumber,
-                        new Shoot(weaponId));
-                    Console.WriteLine($"Sent SHOOT seq={sequenceNumber} weaponId={weaponId}");
-                }
-
-                udp.Send(datagram, datagram.Length);
-
-                try
-                {
-                    var sender = new IPEndPoint(IPAddress.Any, 0);
-                    byte[] responseBytes = udp.Receive(ref sender);
-                    Packet response = ProtocolSerializer.Deserialize(responseBytes);
-
-                    if (response.Header.SequenceNumber != sequenceNumber)
+                    Console.WriteLine($"Sent SHOOT seq={sequenceNumber} weaponId={weaponId} requiresAck=true");
+                    ShootDeliveryResult result = ReliableShootSender.Send(transport, delivery, sequenceNumber, weaponId,
+                        waitForState: true, stateTimeoutMs: options.TimeoutMilliseconds, log: Console.WriteLine);
+                    if (result.Delivered && result.State is StateUpdate state)
                     {
-                        throw new ProtocolException(
-                            "Response SequenceNumber does not match the request");
+                        PrintResponse(new Packet(new PacketHeader(PacketType.StateUpdate, sequenceNumber,
+                            ProtocolConstants.StateUpdatePayloadSize, ProtocolConstants.ProtocolVersion), state));
+                        responsesReceived++;
                     }
-
-                    PrintResponse(response);
-                    responsesReceived++;
-                }
-                catch (SocketException error) when (
-                    error.SocketErrorCode is SocketError.TimedOut or SocketError.WouldBlock)
-                {
-                    Console.Error.WriteLine($"Timeout waiting for response to seq={sequenceNumber}");
+                    else if (result.Delivered)
+                    {
+                        Console.Error.WriteLine($"SHOOT seq={sequenceNumber} delivered, but STATE_UPDATE not received");
+                    }
                 }
 
                 if (index + 1 < options.Count)
@@ -129,6 +148,9 @@ internal static class Program
                 case "--experiment":
                     options.Experiment = true;
                     break;
+                case "--reliability-experiment":
+                    options.ReliabilityExperiment = true;
+                    break;
                 case "--csv" when i + 1 < args.Length:
                     options.CsvPath = args[++i];
                     break;
@@ -136,7 +158,7 @@ internal static class Program
                     Console.WriteLine(
                         "Usage: UdpGame.Client [--host 127.0.0.1] [--port 27015] " +
                         "[--count 6] [--interval-ms 500] [--timeout-ms 2000] " +
-                        "[--experiment] [--csv docs/latency_samples.csv]");
+                        "[--experiment | --reliability-experiment] [--csv path]");
                     Environment.Exit(0);
                     break;
                 default:
@@ -144,6 +166,10 @@ internal static class Program
             }
         }
 
+        if (options.Experiment && options.ReliabilityExperiment)
+        {
+            throw new ArgumentException("Choose either --experiment or --reliability-experiment");
+        }
         return options;
     }
 
@@ -190,6 +216,7 @@ internal static class Program
         public int IntervalMilliseconds { get; set; } = 500;
         public int TimeoutMilliseconds { get; set; } = 2000;
         public bool Experiment { get; set; }
-        public string CsvPath { get; set; } = "docs/latency_samples.csv";
+        public bool ReliabilityExperiment { get; set; }
+        public string? CsvPath { get; set; }
     }
 }
