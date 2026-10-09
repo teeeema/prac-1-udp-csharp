@@ -14,6 +14,18 @@ public static class NetworkProfiles
 {
     private const int FixedSeed = 20260923;
 
+    public const int ReliabilitySeed = 20261009;
+
+    public static IReadOnlyList<NetworkProfile> ReliabilityProfiles { get; } =
+    [
+        new("baseline", 0, 0, 0, 0d, ReliabilitySeed),
+        new("loss_5", 0, 0, 0, 5d, ReliabilitySeed),
+        new("loss_10", 0, 0, 0, 10d, ReliabilitySeed),
+        new("loss_20", 0, 0, 0, 20d, ReliabilitySeed),
+        new("delay_100_loss_5", 100, 0, 0, 5d, ReliabilitySeed),
+        new("jitter_loss_10", 0, 20, 150, 10d, ReliabilitySeed),
+    ];
+
     public static IReadOnlyList<NetworkProfile> ExperimentProfiles { get; } =
     [
         new("baseline", 0, 0, 0, 0d, FixedSeed),
