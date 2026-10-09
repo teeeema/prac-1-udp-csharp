@@ -1,4 +1,4 @@
-# UDP Game Protocol — практические работы №1 и №2
+# UDP Game Protocol — практические работы №1–№3 (фундамент)
 
 ## Что это за проект
 
@@ -12,9 +12,17 @@
 
 Режим --experiment использует PING/PONG и собирает RTT, SRTT, Jitter, Loss. Шесть профилей по 50 PING позволяют сравнить базовый обмен, delay, jitter и loss. Программный Network Emulator работает на исходящих PING клиента; повторных отправок нет.
 
+## ПР №3
+
+Реализован фундамент надёжной доставки: ACK, однобайтовый RequiresAck, отдельный ReliableChannel с pending/failed, retransmission и maxAttempts=5 (первая отправка + максимум четыре повтора). Adaptive RTO рассчитывает SRTT/RTTVAR и ограничивает timeout диапазоном 100–3000 ms; до первого sample RTO=1000 ms. ACK-метаданные позволяют соблюдать Karn.
+
+Client/Server integration надёжного SHOOT, отправка ACK сервером и серверная дедупликация пока **не реализованы**. Эксперимент ПР №3, CSV, графики и итоговый анализ — следующий этап; вся ПР №3 ещё не завершена. [Архитектура и формулы надёжной доставки](docs/Reliability_Protocol.md).
+
+Wire version повышена до 2 из-за расширения header: клиент и сервер обновляются вместе, v1 отклоняется. Обычный игровой режим и эксперимент ПР №2 продолжают отправлять пакеты без ACK.
+
 ## Архитектура
 
-Protocol задаёт wire format и validation, Transport передаёт дейтаграммы и применяет эмулятор, Telemetry хранит inFlight и рассчитывает метрики. Client организует сценарии, Server хранит авторитетное состояние и отвечает на PING.
+Protocol задаёт wire format и validation, Transport передаёт дейтаграммы и применяет эмулятор, Telemetry хранит inFlight и рассчитывает метрики. Reliability хранит состояние доставки и адаптивный timeout без сетевого IO; к Client/Server пока не подключён. Client организует сценарии, Server хранит авторитетное состояние и отвечает на PING.
 
 Путь эксперимента: Client → UdpTransport → UDP → серверный UdpTransport → Server. Обычный клиент использует UdpClient напрямую. Сервер использует UdpTransport в обоих сценариях. [Подробные зависимости и диаграммы](docs/Architecture_Design.md).
 
@@ -25,12 +33,14 @@ UdpGame.sln
 src/
 ├── UdpGame.Protocol/       # header, payload, serializer, validation
 ├── UdpGame.Transport/      # UdpTransport и NetworkEmulator
+├── UdpGame.Reliability/    # pending/failed, retransmission, adaptive RTO
 ├── UdpGame.Telemetry/      # inFlight, RTT/SRTT/jitter/loss
 ├── UdpGame.Server/         # состояние игры и PONG
 └── UdpGame.Client/         # обычный режим и ExperimentRunner
 tests/
 ├── UdpGame.Protocol.Tests/
-└── UdpGame.Telemetry.Tests/
+├── UdpGame.Telemetry.Tests/
+└── UdpGame.Reliability.Tests/
 docs/                      # спецификация, архитектура, CSV, графики, фото
 ```
 
@@ -38,19 +48,21 @@ docs/                      # спецификация, архитектура, C
 
 | Пакет | Направление | Назначение | Полный размер, bytes |
 |---|---|---|---:|
-| MOVEMENT | Client → Server | Координаты | 19 |
-| SHOOT | Client → Server | Выстрел | 8 |
-| STATE_UPDATE | Server → Client | Авторитетное состояние | 26 |
-| PING | Client → Server | Начало измерения | 15 |
-| PONG | Server → Client | Ответ для измерения RTT | 31 |
+| MOVEMENT | Client → Server | Координаты | 20 |
+| SHOOT | Client → Server | Выстрел | 9 |
+| STATE_UPDATE | Server → Client | Авторитетное состояние | 27 |
+| PING | Client → Server | Начало измерения | 16 |
+| PONG | Server → Client | Ответ для измерения RTT | 32 |
+| ACK | Получатель → отправитель (после интеграции) | Подтверждение sequence | 10 |
 
-Header — 7 байт, ProtocolVersion = 1, многобайтовые числа — big-endian. [Wire specification](docs/Protocol_Specification.md).
+Header — 8 байт, ProtocolVersion = 2, многобайтовые числа — big-endian. [Wire specification](docs/Protocol_Specification.md).
 
 ## Build
 
 Требуется .NET SDK 10.0 и возможность восстановления NuGet-пакетов. Все проекты нацелены на net10.0. Команды выполняются из корня проекта.
 
 ```bash
+dotnet restore
 dotnet build UdpGame.sln
 ```
 
@@ -62,7 +74,7 @@ dotnet build UdpGame.sln
 dotnet test UdpGame.sln --no-build
 ```
 
-В исходниках 21 тестовый метод: 11 Protocol.Tests и 10 Telemetry.Tests, MSTest 4.0.2. Проверяются wire format, ошибки пакетов, формулы метрик и классификация PONG. При обновлении документации эксперимент не запускался.
+В исходниках 58 тестовых методов: 21 Protocol.Tests, 10 Telemetry.Tests и 27 Reliability.Tests, MSTest 4.0.2. Проверяются wire format, ошибки пакетов, метрики ПР №2, retransmission, failed, Karn-метаданные и adaptive RTO. Сохранены все 21 прежних тестов; точные wire fixtures обновлены для версии 2. Эксперимент ПР №3 не запускался.
 
 ## Запуск сервера
 
@@ -112,6 +124,7 @@ Experiment mode работает с PING / PONG / RTT / SRTT / Jitter / Loss: 6 
 ## Документация
 
 - [Architecture Design](docs/Architecture_Design.md): развитие ПР №1 → ПР №2, модули, обмен, inFlight.
+- [Reliability Protocol](docs/Reliability_Protocol.md): фундамент ПР №3 и границы следующего этапа.
 - [Protocol Specification](docs/Protocol_Specification.md): header, offsets, payload, validation.
 - [Experiment_Config.md](docs/Experiment_Config.md) — конфигурация эксперимента, параметры эмуляции и воспроизводимость.
 - [Latency_Report.md](docs/Latency_Report.md) — результаты эксперимента, итоговая статистика и выводы.

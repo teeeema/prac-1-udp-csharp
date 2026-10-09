@@ -14,7 +14,7 @@ UdpGame.Protocol задаёт MOVEMENT, SHOOT и STATE_UPDATE. UdpGame.Client о
 
 ### Практическая работа №2
 
-Добавлены UdpGame.Transport, UdpGame.Telemetry, PING/PONG, Network Emulator и режим --experiment. Игровой сценарий сохранён. Текущий header всех пяти типов содержит ProtocolVersion; сохранение сценария не означает побайтовую совместимость с прежним заголовком без версии.
+Добавлены UdpGame.Transport, UdpGame.Telemetry, PING/PONG, Network Emulator и режим --experiment. Игровой сценарий сохранён. Header ПР №2 всех пяти типов содержит ProtocolVersion; сохранение сценария не означает побайтовую совместимость с прежним заголовком без версии.
 
 | Аспект | ПР №1 | ПР №2 — развитие |
 |---|---|---|
@@ -53,16 +53,18 @@ flowchart LR
 | UdpGame.Protocol | Нет |
 | UdpGame.Transport | Нет |
 | UdpGame.Telemetry | Нет |
+| UdpGame.Reliability | Нет |
+| UdpGame.Reliability.Tests | UdpGame.Reliability |
 | UdpGame.Protocol.Tests | UdpGame.Protocol |
 | UdpGame.Telemetry.Tests | UdpGame.Telemetry |
 
-Transport получает сериализованные байты и не зависит от Protocol. Telemetry не зависит от Protocol или Transport. Все семь проектов используют net10.0; тестовые проекты подключают MSTest 4.0.2.
+Transport получает сериализованные байты и не зависит от Protocol. Telemetry не зависит от Protocol или Transport. Все девять проектов используют net10.0; тестовые проекты подключают MSTest 4.0.2.
 
 ## 4. UdpGame.Protocol
 
-Packet объединяет PacketHeader и объект payload. Header содержит PacketType, SequenceNumber, PayloadSize и ProtocolVersion. PacketType определяет пять допустимых сообщений; payload представлены record struct Movement, Shoot, StateUpdate, Ping, Pong.
+Packet объединяет PacketHeader и объект payload. Header содержит PacketType, SequenceNumber, PayloadSize, ProtocolVersion и RequiresAck. PacketType определяет шесть допустимых сообщений; payload представлены record struct Movement, Shoot, StateUpdate, Ping, Pong, AckPayload.
 
-ProtocolSerializer явно записывает поля в big-endian, а не копирует память C#-объектов. При чтении проверяются длина, тип, версия, размер payload и значения отдельных полей. ProtocolConstants задаёт header 7 байт, версию 1 и MaxPacketSize = 1024. ProtocolException сигнализирует об ошибке wire format. Ограничения мира и оружия принадлежат серверу, а не сериализатору.
+ProtocolSerializer явно записывает поля в big-endian, а не копирует память C#-объектов. При чтении проверяются длина, тип, версия, размер payload и значения отдельных полей. ProtocolConstants задаёт header 8 байт, версию 2 и MaxPacketSize = 1024. ProtocolException сигнализирует об ошибке wire format. Ограничения мира и оружия принадлежат серверу, а не сериализатору.
 
 ## 5. UdpGame.Transport
 
@@ -192,16 +194,16 @@ stateDiagram-v2
 
 | Ситуация | Где обнаруживается | Результат |
 |---|---|---|
-| Менее 7 байт, truncated packet | Deserialize: длина header/payload | ProtocolException |
+| Менее 8 байт, truncated packet | Deserialize: длина header/payload | ProtocolException |
 | Более MaxPacketSize = 1024 байт | Deserialize до чтения полей | ProtocolException |
 | Invalid PacketType | DecodePacketType | ProtocolException |
-| Invalid ProtocolVersion: не 1 | Deserialize | ProtocolException |
+| Invalid ProtocolVersion: не 2 | Deserialize | ProtocolException |
 | Invalid PayloadSize: не совпадает с длиной или типом | Deserialize / RequirePayloadSize | ProtocolException |
 | NaN/Infinity, неверный enum ответа | ReadMovement / ReadStateUpdate | ProtocolException |
 
 Сервер ловит ProtocolException внутри цикла, пишет MALFORMED и продолжает приём. ExperimentRunner игнорирует malformed-ответы и короткие socket timeout. Обычный клиент не имеет внутреннего перехвата ProtocolException: ошибка ответа достигает внешнего обработчика и завершает клиент с кодом 1. Прочие сетевые ошибки вне специальных обработчиков также могут завершить процесс; устойчивость к malformed datagrams не означает перехват всех возможных ошибок.
 
-В исходниках 21 тестовый метод: 11 в Protocol.Tests, 10 в Telemetry.Tests. Они проверяют wire format, round-trip, UInt16/UInt64 big-endian, неверные размеры/версию/тип, RTT/SRTT/jitter/loss/median и классификацию PONG. Это не отдельные интеграционные тесты сокетов или эмулятора.
+В исходниках 58 тестовых методов: 21 в Protocol.Tests, 10 в Telemetry.Tests, 27 в Reliability.Tests. Новые тесты проверяют ACK/RequiresAck, retransmission, maxAttempts, failed, Karn-метаданные и AdaptiveTimeout. Они проверяют wire format, round-trip, UInt16/UInt64 big-endian, неверные размеры/версию/тип, RTT/SRTT/jitter/loss/median и классификацию PONG. Это не отдельные интеграционные тесты сокетов или эмулятора.
 
 ## 13. Почему модули разделены
 
@@ -211,4 +213,6 @@ Client связывает компоненты в сценарий, выбира
 
 ## 14. Связь с дальнейшими работами
 
-SequenceNumber, inFlight, timeout и RTT/SRTT дают основу для будущих ACK и retransmission. Сейчас нет повторной передачи PING, адаптивного timeout, гарантированной доставки или защиты игрового SHOOT от повторного исполнения. Поле Attempts и классификация дубликатов телеметрии не означают, что эти функции реализованы.
+В фундаменте ПР №3 добавлены ACK/RequiresAck (wire v2), UdpGame.Reliability с ReliableChannel и AdaptiveTimeout. Reliability не зависит от Protocol, Transport или Telemetry и не открывает сокеты. Канал хранит копии байтов и immutable metadata; CollectForRetransmission выбирает повторы, а отправку выполняет будущий вызывающий слой. OnAckReceived с out PendingPacket возвращает метаданные для Karn. Подробности — в [Reliability Protocol](Reliability_Protocol.md).
+
+Client/Server пока не используют Reliability: обычные команды и PING/PONG отправляются без ACK. Повторы PING, автоматическая надёжная отправка SHOOT, серверные ACK и защита от повторного выполнения не реализованы. AdaptiveTimeout существует как отдельный компонент и не меняет timeout эксперимента ПР №2. Эксперимент ПР №3 ещё не выполнен.
