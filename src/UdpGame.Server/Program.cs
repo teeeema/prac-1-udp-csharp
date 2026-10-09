@@ -8,7 +8,6 @@ namespace UdpGame.Server;
 internal static class Program
 {
     private const int DefaultPort = 27015;
-    private const float WorldLimit = 1000f;
 
     private static int Main(string[] args)
     {
@@ -17,7 +16,7 @@ internal static class Program
             ServerOptions options = ParseOptions(args);
             using var transport = UdpTransport.Bind(options.Port);
             using var logFile = new StreamWriter(options.LogFile, append: true) { AutoFlush = true };
-            var clients = new Dictionary<string, ClientState>();
+            var clients = new Dictionary<string, GameSession>();
 
             Log(logFile, $"authoritative UDP server listening on 0.0.0.0:{options.Port}");
 
@@ -33,8 +32,18 @@ internal static class Program
                 {
                     Packet packet = ProtocolSerializer.Deserialize(datagram);
 
+                    if (packet.Payload is AckPayload)
+                    {
+                        continue; // Server does not originate reliable commands in this practice.
+                    }
+
                     if (packet.Payload is Ping ping)
                     {
+                        if (packet.Header.RequiresAck)
+                        {
+                            transport.SendTo(ProtocolSerializer.SerializeAck(packet.Header.SequenceNumber,
+                                new AckPayload(packet.Header.SequenceNumber)), sender);
+                        }
                         ulong serverSendTimeUs = NowMicroseconds();
                         var pong = new Pong(
                             ping.ClientSendTimeUs,
@@ -59,69 +68,16 @@ internal static class Program
                         continue;
                     }
 
-                    if (!clients.TryGetValue(clientKey, out ClientState? state))
+                    if (!clients.TryGetValue(clientKey, out GameSession? session))
                     {
-                        state = new ClientState();
-                        clients[clientKey] = state;
+                        session = new GameSession();
+                        clients[clientKey] = session;
                     }
-
-                    StatusCode status = StatusCode.Accepted;
-                    string details;
-
-                    if (packet.Payload is Movement movement)
-                    {
-                        details = $"x={movement.X} y={movement.Y} z={movement.Z}";
-                        if (CoordinateInWorld(movement.X) &&
-                            CoordinateInWorld(movement.Y) &&
-                            CoordinateInWorld(movement.Z))
-                        {
-                            state.X = movement.X;
-                            state.Y = movement.Y;
-                            state.Z = movement.Z;
-                        }
-                        else
-                        {
-                            status = StatusCode.OutOfRange;
-                        }
-                    }
-                    else if (packet.Payload is Shoot shoot)
-                    {
-                        details = $"weaponId={shoot.WeaponId}";
-                        if (shoot.WeaponId is >= 1 and <= 3)
-                        {
-                            state.ShotsFired++;
-                            state.LastWeaponId = shoot.WeaponId;
-                        }
-                        else
-                        {
-                            status = StatusCode.OutOfRange;
-                        }
-                    }
-                    else
-                    {
-                        throw new ProtocolException("Unsupported client payload");
-                    }
-
-                    var responseState = new StateUpdate(
-                        packet.Header.PacketType,
-                        status,
-                        state.X,
-                        state.Y,
-                        state.Z,
-                        state.ShotsFired,
-                        state.LastWeaponId);
-
-                    byte[] responseBytes = ProtocolSerializer.SerializeStateUpdate(
-                        packet.Header.SequenceNumber,
-                        responseState);
-                    transport.SendTo(responseBytes, sender);
-
-                    Log(
-                        logFile,
-                        $"command={PacketTypeName(packet.Header.PacketType)} " +
-                        $"seq={packet.Header.SequenceNumber} from={clientKey} {details} " +
-                        $"result={StatusName(status)} " +
-                        $"state=({state.X},{state.Y},{state.Z}) shots={state.ShotsFired}");
+                    CommandResult result = session.Handle(packet, bytes => transport.SendTo(bytes, sender));
+                    Log(logFile,
+                        $"command={PacketTypeName(packet.Header.PacketType)} seq={packet.Header.SequenceNumber} " +
+                        $"from={clientKey} duplicate={result.Duplicate} result={StatusName(result.State.Status)} " +
+                        $"state=({result.State.X},{result.State.Y},{result.State.Z}) shots={session.ShotsFired}");
 
                     processedPackets++;
                 }
@@ -148,9 +104,6 @@ internal static class Program
         long timestamp = Stopwatch.GetTimestamp();
         return checked((ulong)(timestamp * (1_000_000d / Stopwatch.Frequency)));
     }
-
-    private static bool CoordinateInWorld(float value) =>
-        float.IsFinite(value) && value >= -WorldLimit && value <= WorldLimit;
 
     private static void Log(StreamWriter file, string message)
     {
@@ -222,12 +175,4 @@ internal static class Program
         public string LogFile { get; set; } = "server.log";
     }
 
-    private sealed class ClientState
-    {
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float Z { get; set; }
-        public uint ShotsFired { get; set; }
-        public byte LastWeaponId { get; set; }
-    }
 }
