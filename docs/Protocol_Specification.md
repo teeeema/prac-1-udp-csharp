@@ -2,7 +2,7 @@
 
 ## 1. Назначение и транспорт
 
-Бинарный протокол C# / .NET 10 передаёт игровые команды ПР №1, измерения ПР №2 и ACK фундамента ПР №3. Источники: [ProtocolSerializer](../src/UdpGame.Protocol/ProtocolSerializer.cs), [модели](../src/UdpGame.Protocol/Packets.cs), [константы](../src/UdpGame.Protocol/ProtocolConstants.cs).
+Бинарный протокол C# / .NET 10 передаёт игровые команды ПР №1, измерения ПР №2 и ACK ПР №3. Источники: [ProtocolSerializer](../src/UdpGame.Protocol/ProtocolSerializer.cs), [модели](../src/UdpGame.Protocol/Packets.cs), [константы](../src/UdpGame.Protocol/ProtocolConstants.cs).
 
 Одна UDP-дейтаграмма содержит один header и один payload. Размеры указаны без UDP/IP-заголовков. MaxPacketSize = 1024 байта; padding, склейка и фрагментация на уровне приложения отсутствуют. UDP сам не гарантирует доставку или порядок. STATE_UPDATE сообщает результат игровой команды; ACK подтверждает доставку по sequence, а не принятие команды игровой логикой.
 
@@ -22,7 +22,7 @@ HeaderSize = **8 байт**, ProtocolVersion = **2**. Все offsets ниже о
 | 5 | 2 | ProtocolVersion | UInt16 BE | 2 |
 | 7 | 1 | RequiresAck | UInt8 | 0 = ACK не требуется, 1 = требуется ACK |
 
-Другие значения RequiresAck недопустимы. В модели PacketHeader поле имеет тип bool; на wire это строго один байт. SerializeMovement, SerializeShoot и SerializeStateUpdate принимают optional `bool requiresAck = false`. SerializePing, SerializePong и SerializeAck всегда записывают false. Десериализация запрещает RequiresAck=true для ACK; для других типов допускает 0/1, а выбор надёжных команд принадлежит будущей интеграции.
+Другие значения RequiresAck недопустимы. В модели PacketHeader поле имеет тип bool; на wire это строго один байт. SerializeMovement, SerializeShoot и SerializeStateUpdate принимают optional `bool requiresAck = false`. SerializePing, SerializePong и SerializeAck всегда записывают false. Десериализация запрещает RequiresAck=true для ACK; для других типов допускает 0/1, политика приложения делает надёжным только SHOOT; MOVEMENT/PING/PONG/STATE_UPDATE отправляются без ACK.
 
 **ACK никогда не требует ACK.** Это исключает бесконечную цепочку подтверждений.
 
@@ -37,9 +37,9 @@ HeaderSize = **8 байт**, ProtocolVersion = **2**. Все offsets ниже о
 | STATE_UPDATE | StateUpdate | 3 | Server → Client | 19 | 27 |
 | PING | Ping | 4 | Client → Server | 8 | 16 |
 | PONG | Pong | 5 | Server → Client | 24 | 32 |
-| ACK | Ack | 6 | Получатель → отправитель, после интеграции | 2 | 10 |
+| ACK | Ack | 6 | Server → Client для reliable SHOOT | 2 | 10 |
 
-Неизвестные коды отвергаются. Направление контролирует приложение: текущий сервер отвергает STATE_UPDATE/PONG от клиента и пока не обрабатывает ACK как подтверждение доставки.
+Неизвестные коды отвергаются. Направление контролирует приложение: сервер отвергает STATE_UPDATE/PONG от клиента; входящий ACK игнорируется, потому что сервер в этой работе не создаёт reliable-пакеты.
 
 ## 5. MOVEMENT
 
@@ -66,7 +66,7 @@ Sequence 0x1234, координаты (1, -2.5, 0.25), RequiresAck=false:
 Wire допускает любой UInt8; сервер принимает 1–3. Принятие увеличивает ShotsFired и обновляет LastWeaponId без изменения позиции. Отказ даёт OUT_OF_RANGE и прежнее состояние.
 
 Sequence 7, WeaponId 3, RequiresAck=false: `02 00 07 00 01 00 02 00 03`.
-При RequiresAck=true: `02 00 07 00 01 00 02 01 03`. Текущий игровой клиент использует false; автоматической надёжной отправки пока нет.
+При RequiresAck=true: `02 00 07 00 01 00 02 01 03`. Текущий игровой клиент создаёт SHOOT с true и повторяет исходные bytes до ACK либо failed; MOVEMENT остаётся с false.
 
 ## 7. STATE_UPDATE
 
@@ -128,7 +128,7 @@ ACK header sequence 0x5678, подтверждение 0x1234:
 06 56 78 00 02 00 02 00 | 12 34
 ```
 
-Повторный или неизвестный ACK не является ошибкой ReliableChannel: OnAckReceived возвращает false. Отправка ACK сервером пока не интегрирована.
+Повторный или неизвестный ACK не является ошибкой ReliableChannel: OnAckReceived возвращает false. Сервер отправляет ACK через UDP до проверки duplicate и игрового эффекта; для duplicate также отправляет ACK. Его header SequenceNumber сейчас равен подтверждаемому номеру, но клиент использует AcknowledgedSequence из payload.
 
 ## 10. ProtocolVersion и совместимость
 
@@ -138,9 +138,9 @@ ACK header sequence 0x5678, подтверждение 0x1234:
 
 ## 11. SequenceNumber и PayloadSize
 
-SequenceNumber — UInt16 0–65535, ноль разрешён. Обычный клиент генерирует 1..count, эксперимент ПР №2 — 1..300. Сервер копирует номер запроса в STATE_UPDATE/PONG. PayloadSize не включает header и должен совпасть с длиной дейтаграммы минус 8 и фиксированным размером типа.
+SequenceNumber — UInt16 0–65535, ноль разрешён. Обычный клиент генерирует 1..count, эксперимент ПР №2 — 1..300, ПР №3 — 1..600 (нечётные PING, чётные SHOOT). Сервер копирует номер запроса в STATE_UPDATE/PONG. PayloadSize не включает header и должен совпасть с длиной дейтаграммы минус 8 и фиксированным размером типа.
 
-ReliableChannel запрещает повторную регистрацию pending sequence. Защита от старых ACK при переиспользовании номера после завершения, rollover и серверная дедупликация — задачи следующего этапа; sequence сам не обеспечивает exactly-once выполнение SHOOT. Канал должен принадлежать одному peer; endpoint проверяет интеграционный слой.
+ReliableChannel запрещает повторную регистрацию pending sequence. Серверная дедупликация хранит 1024 ID/результата на endpoint и допускает rollover 65535 → 0 через равенство ID. Защита от старых ACK при переиспользовании номера после завершения и session identifier не реализованы; sequence сам не обеспечивает глобальное exactly-once выполнение SHOOT. Канал должен принадлежать одному peer; endpoint проверяет интеграционный слой.
 
 ## 12. Validation
 
@@ -160,4 +160,4 @@ ReliableChannel запрещает повторную регистрацию pen
 
 ## 13. Проверка
 
-Protocol.Tests содержит 21 тестовый метод: 11 сохранённых (wire fixtures обновлены для v2) и 10 новых. Проверяются ACK round-trip и точные big-endian байты, RequiresAck на игровых пакетах, все прежние типы и их false по умолчанию, запрет ACK-on-ACK, неверный флаг, неверные длины ACK с согласованной длиной datagram, каждое усечение ACK/header, v1 и превышение MaxPacketSize. Метрики ПР №2 проверяются отдельно в Telemetry.Tests.
+Protocol.Tests содержит 21 тестовый метод: 11 сохранённых (wire fixtures обновлены для v2) и 10 новых. Проверяются ACK round-trip и точные big-endian байты, RequiresAck на игровых пакетах, все прежние типы и их false по умолчанию, запрет ACK-on-ACK, неверный флаг, неверные длины ACK с согласованной длиной datagram, каждое усечение ACK/header, v1 и превышение MaxPacketSize. Метрики ПР №2 проверяются отдельно в Telemetry.Tests; Client/Server ACK, Karn, failed и dedup — в 20 Integration-тестах. [Реализация надёжности и фактический эксперимент](Reliability_Protocol.md).
